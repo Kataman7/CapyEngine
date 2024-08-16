@@ -1,26 +1,31 @@
 ﻿using CapyEngine.EntityNode;
 using Raylib_CsLo;
 
-namespace TerrariaLikeCs
+namespace CapyEngine.CameraNode
 {
     public class Camera
     {
         public Camera2D camera;
         private int speed;
-        public Entity target;
+        public Entity ?target;
         public bool followTarget;
 
-
-        public Camera(Entity target, int speed, float zoom, bool followTarget)
+        public Camera(int speed, float zoom)
         {
             camera = new Camera2D();
             camera.zoom = zoom;
             this.speed = speed;
-            this.followTarget = followTarget;
+            followTarget = true;
+            target = null;
+        }
+
+
+        public Camera(Entity target, int speed, float zoom) : this(speed, zoom)
+        {
             this.target = target;
         }
 
-        public void update()
+        public void Update()
         {
 
             if (Raylib.IsKeyPressed(KeyboardKey.KEY_ENTER))
@@ -28,7 +33,7 @@ namespace TerrariaLikeCs
                 followTarget = !followTarget;
             }
 
-            if (followTarget)
+            if (followTarget && target != null)
             {
                 camera.target.X = target.hitBox.x - Raylib.GetScreenWidth() / 2;
                 camera.target.Y = target.hitBox.y - Raylib.GetScreenHeight() / 2;

@@ -11,9 +11,4 @@
     <PackageReference Include="Raylib-CsLo" Version="4.2.0.9" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="EntityNode\GuiNode\" />
-    <Folder Include="EntityNode\SpriteNode\" />
-  </ItemGroup>
-
 </Project>

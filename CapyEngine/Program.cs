@@ -1,4 +1,4 @@
-﻿using CapyEngine.SceneNode;
+﻿using CapyEngine;
 using Raylib_CsLo;
 
 namespace TerrariaLikeCs
@@ -11,8 +11,8 @@ namespace TerrariaLikeCs
 
             while (!Raylib.WindowShouldClose())
             {
-                CurrentScene.scene.Update();
-                CurrentScene.scene.Draw();
+                Game.currentScene.Update();
+                Game.currentScene.Draw();
             }
 
             Raylib.CloseWindow();

@@ -3,7 +3,7 @@ using System.Numerics;
 
 namespace CapyEngine.EntityNode
 {
-    public class Entity
+    public abstract class Entity
     {
         public Rectangle hitBox;
         public Color hitBoxColor;
