@@ -7,9 +7,8 @@ namespace CapyEngine.SceneNode
         public void Draw();
         public void Update();
     }
-}
-
-static class CurrentScene
-{
-    public static IScene? scene;
+    static class CurrentScene
+    {
+        public static IScene? scene;
+    }
 }
