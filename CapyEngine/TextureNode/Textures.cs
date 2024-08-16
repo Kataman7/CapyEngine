@@ -1,4 +1,5 @@
 ﻿using CapyEngine.TileNode;
+using Raylib_CsLo;
 
 namespace CapyEngine.TextureNode
 {
@@ -22,6 +23,14 @@ namespace CapyEngine.TextureNode
         public static Texture Get(TileID tileID)
         {
             return list[tileID];
+        }
+
+        public static void UnloadTexture()
+        {
+            foreach (var texture in list)
+            {
+                Raylib.UnloadTexture(texture.Value.texture);
+            }
         }
     }
 }

@@ -8,12 +8,11 @@ namespace TerrariaLikeCs
         public static async Task Main(string[] args)
         {
             Raylib.InitWindow(1280, 720, "CapyEngine");
-            CurrentScene.scene = new BasicScene();
 
             while (!Raylib.WindowShouldClose())
             {
-                CurrentScene.scene.update();
-                CurrentScene.scene.draw();
+                CurrentScene.scene.Update();
+                CurrentScene.scene.Draw();
             }
 
             Raylib.CloseWindow();

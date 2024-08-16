@@ -19,7 +19,6 @@ namespace CapyEngine.SceneNode
             origin = new Vector2(rectangle.width / 2, rectangle.height / 2);
             rotation = 0;
             timer = 0;
-            Raylib.SetTargetFPS(60000);
         }
 
         public void Update()
@@ -41,6 +40,7 @@ namespace CapyEngine.SceneNode
             Raylib.ClearBackground(Raylib.RAYWHITE);
             Raylib.DrawRectanglePro(rectangle, origin, rotation, color);
             Raylib.EndMode2D();
+            Raylib.DrawFPS(20, 20);
             Raylib.EndDrawing();
         }
 
