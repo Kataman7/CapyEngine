@@ -17,6 +17,7 @@ namespace CapyEngine.TileNode
             this.id = id;
             origin = new Vector2(0, 0);
             texture = Textures.Get(id);
+            state = TileStates.Get(id);
         }
 
         public Tile(Tile tile, int x, int y, int size) : this(tile.id, x, y, size) { }

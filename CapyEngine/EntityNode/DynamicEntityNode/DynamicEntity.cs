@@ -32,12 +32,10 @@ namespace CapyEngine.EntityNode.DynamicEntityNode
                 for (int x = (int)blockX - 2; x < blockX + 2; ++x)
                 {
                     Tile tile = world.tileMap.GetTilePro(x, y);
-                    if (tile != null)
+
+                    if (Raylib.CheckCollisionRecs(hitBox, tile.hitBox))
                     {
-                        if (Raylib.CheckCollisionRecs(hitBox, tile.hitBox))
-                        {
-                            return tile.state;
-                        }
+                        return tile.state;
                     }
                 }
             }

@@ -2,6 +2,6 @@
 {
     public enum TileID
     {
-        GROUND, WALL, VOID
+        VOID, STONE, DIRT, DIRT_GRASS
     }
 }

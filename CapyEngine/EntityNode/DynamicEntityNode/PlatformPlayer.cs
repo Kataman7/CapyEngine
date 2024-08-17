@@ -18,11 +18,12 @@ namespace CapyEngine.EntityNode.DynamicEntityNode
             jumpCount = 0;
             jumpPower = 600;
             jumpMax = 3;
-            speed = 300;
+            speed = 30;
         }
         private void Moove(int direction)
         {
-            hitBox.x += speed * direction * Raylib.GetFrameTime();
+            //hitBox.x += speed * direction * Raylib.GetFrameTime();
+            velX += speed * direction;
         }
         private void Jump()
         {
@@ -49,6 +50,9 @@ namespace CapyEngine.EntityNode.DynamicEntityNode
         }
         public override void Update()
         {
+
+            Control();
+
             float previousX = hitBox.x;
             float previousY = hitBox.y;
 
@@ -65,11 +69,20 @@ namespace CapyEngine.EntityNode.DynamicEntityNode
                 hitBox.y = previousY;
             }
 
-            Control();
+            hitBox.x += velX * Raylib.GetFrameTime();
 
             if (checkTileMapCollision() == TileState.SOLID)
             {
+                velX = 0;
                 hitBox.x = previousX;
+            }
+
+            float friction = 0.95f;
+            velX *= friction;
+
+            if (Math.Abs(velX) < 0.01f)
+            {
+                velX = 0;
             }
         }
 

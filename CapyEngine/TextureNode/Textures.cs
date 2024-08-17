@@ -14,8 +14,9 @@ namespace CapyEngine.TextureNode
 
             list = new Dictionary<TileID, Texture> ()
             {
-                { TileID.WALL, new Texture(root + "wall.png") },
-                { TileID.GROUND, new Texture(root + "ground.png") },
+                { TileID.DIRT_GRASS, new Texture(root + "dirt_grass.png") },
+                { TileID.DIRT, new Texture(root + "dirt.png") },
+                { TileID.STONE, new Texture(root + "stone.png") },
                 { TileID.VOID, new Texture(root + "void.png") }
             };
         }

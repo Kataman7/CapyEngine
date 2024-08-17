@@ -1,4 +1,5 @@
 ﻿using CapyEngine.TileNode;
+using Raylib_CsLo.InternalHelpers;
 
 namespace TerrariaLikeCs
 {
@@ -25,34 +26,33 @@ namespace TerrariaLikeCs
 
         public static Random random = new Random();
 
-        public static void randomTileGeneration(TileMap tileMap, int x, int y, float chanceToLive, Tile livingValue, Tile deadValue, Tile ?conditionValue)
+        public static void RandomTileGeneration(TileMap tileMap, int x, int y, float chanceToLive, TileID livingValue, TileID deadValue, TileID? conditionValue)
         {
-            if (conditionValue == null || tileMap.GetTile(x, y) == conditionValue)
+            if (conditionValue == null || tileMap.GetTile(x, y).id == conditionValue)
             {
                 if (random.NextDouble() < chanceToLive)
                 {
-                    tileMap.SetTile(x, y, new Tile(livingValue, x, y, tileMap.tileSize));
+                    tileMap.SetTile(x, y, livingValue);
                 }
                 else
                 {
-                    tileMap.SetTile(x, y, new Tile(deadValue, x, y, tileMap.tileSize));
+                    tileMap.SetTile(x, y, deadValue);
                 }
             }
         }
 
-        public static void RandomGridGeneration(TileMap tileMap, float chanceToLive, Tile livingValue, Tile deadValue, Tile ?conditionValue)
+        public static void RandomGridGeneration(TileMap tileMap, float chanceToLive, TileID livingValue, TileID deadValue, TileID? conditionValue)
         {
-
             for (int y = 0; y < tileMap.height; y++)
             {
                 for (int x = 0; x < tileMap.width; x++)
                 {
-                    randomTileGeneration(tileMap, x, y, chanceToLive, livingValue, deadValue, conditionValue);
+                    RandomTileGeneration(tileMap, x, y, chanceToLive, livingValue, deadValue, conditionValue);
                 }
             }
         }
 
-        public static int CountNeighbor(TileMap tileMap, Tile neighbor, int x, int y)
+        public static int CountNeighbor(TileMap tileMap, TileID neighbor, int x, int y)
         {
             int count = 0;
 
@@ -65,7 +65,7 @@ namespace TerrariaLikeCs
                         int neighborX = x + i;
                         int neighborY = y + j;
 
-                        if (tileMap.GetTilePro(neighborX, neighborY) == neighbor)
+                        if (tileMap.GetTilePro(neighborX, neighborY).id == neighbor)
                         {
                             count++;
                         }
@@ -76,7 +76,7 @@ namespace TerrariaLikeCs
             return count;
         }
 
-        public static int[,] CreateNeighborsGrid(TileMap tileMap, Tile livingValue)
+        public static int[,] CreateNeighborsGrid(TileMap tileMap, TileID livingValue)
         {
             int[,] neighborsGrid = new int[tileMap.width, tileMap.height];
 
@@ -91,7 +91,7 @@ namespace TerrariaLikeCs
             return neighborsGrid;
         }
 
-        public static void nextCaveGeneration(TileMap tileMap, Tile livingValue, Tile deadValue)
+        public static void NextCaveGeneration(TileMap tileMap, TileID livingValue, TileID deadValue)
         {
             int[,] neighborsGrid = CreateNeighborsGrid(tileMap, livingValue);
 
@@ -101,13 +101,13 @@ namespace TerrariaLikeCs
                 {
                     int neighbors = neighborsGrid[x, y];
 
-                    if (neighbors < 4 && tileMap.GetTile(x, y) == livingValue)
+                    if (neighbors < 4 && tileMap.GetTile(x, y).id == livingValue)
                     {
-                        tileMap.SetTile(x, y, new Tile(deadValue, x, y, tileMap.tileSize));
+                        tileMap.SetTile(x, y, deadValue);
                     }
-                    else if (neighbors > 4 && tileMap.GetTile(x, y) == deadValue)
+                    else if (neighbors > 4 && tileMap.GetTile(x, y).id == deadValue)
                     {
-                        tileMap.SetTile(x, y, new Tile(livingValue, x, y, tileMap.tileSize));
+                        tileMap.SetTile(x, y, livingValue);
                     }
                 }
             }
@@ -120,7 +120,7 @@ namespace TerrariaLikeCs
 
             for (int i = 0; i < width; i++)
             {
-                altitude[i] = (int)((Math.Sin(x) /* *a */ * height)) + bias;
+                altitude[i] = (int)((Math.Sin(x) * height)) + bias;
                 x += drop;
             }
 

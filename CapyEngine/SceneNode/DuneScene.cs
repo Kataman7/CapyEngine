@@ -11,12 +11,13 @@ namespace CapyEngine.SceneNode
 
         public DuneScene()
         {
-            world = new DuneWorld(100, 100, 5);
-            player = new PlatformPlayer(0, 0, world);
+            world = new DuneWorld(100, 100, 30);
+            player = new PlatformPlayer(world.tileMap.width / 2, -world.tileMap.height, world);
 
             world.entities.Add(player);
             Game.currentCamera.target = player;
-    }
+            Raylib.SetTargetFPS(60);
+        }
 
         public void Update()
         {

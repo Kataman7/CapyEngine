@@ -16,6 +16,11 @@ namespace CapyEngine.TileNode
             this.height = height;
             this.tileSize = tileSize;
             tiles = new Tile[width*height];
+
+            for (int i = 0; i < width * height; i++)
+            {
+                tiles[i] = new Tile(TileID.VOID, 0, 0, tileSize);
+            }
         }
 
         public Tile GetTile(int x, int y)
@@ -27,19 +32,19 @@ namespace CapyEngine.TileNode
         {
             x = ((x % width) + width) % width;
             y = ((y % height) + height) % height;
-            return tiles[y * width + x];
+            return GetTile(x, y);
         }
 
-        public void SetTile(int x, int y, Tile tile)
+        public void SetTile(int x, int y, TileID tileID)
         {
-            tiles[y * width + x] = tile;
+            tiles[y * width + x] = new Tile(tileID, x, y, tileSize);
         }
 
-        public void SetTilePro(int x, int y, Tile tile)
+        public void SetTilePro(int x, int y, TileID tileID)
         {
             x = ((x % width) + width) % width;
             y = ((y % height) + height) % height;
-            tiles[y * width + x] = tile;
+            SetTile(x, y, tileID);
         }
 
         public void Draw()
@@ -51,10 +56,6 @@ namespace CapyEngine.TileNode
                     if (GetTile(x, y) != null && GetTile(x, y).id != TileID.VOID)
                     {
                         GetTile(x, y).Draw();
-                    }
-                    else
-                    {
-                       // Console.WriteLine(false);
                     }
                 }
             }
