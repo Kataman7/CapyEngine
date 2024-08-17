@@ -20,16 +20,9 @@ namespace CapyEngine.TileNode
             state = TileStates.Get(id);
         }
 
-        public Tile(Tile tile, int x, int y, int size) : this(tile.id, x, y, size) { }
-
-        public Tile(TileID id, int x, int y, int size, TileState state) : this(id, x, y, size)
-        {
-            this.state = state;
-        }
-
         public override void Draw()
         {
-            //base.Draw();
+            base.Draw();
             Raylib.DrawTexturePro(texture.texture, texture.hitBox, hitBox, origin, 0, Raylib.WHITE);
         }
 

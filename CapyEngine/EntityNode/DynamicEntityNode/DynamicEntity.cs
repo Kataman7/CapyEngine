@@ -27,15 +27,18 @@ namespace CapyEngine.EntityNode.DynamicEntityNode
             float blockX = hitBox.x / world.tileMap.tileSize;
             float blockY = hitBox.y / world.tileMap.tileSize;
 
-            for (int y = (int)blockY - 2; y < blockY + 2; ++y)
+            for (int y = (int)blockY - 5; y < blockY + 5; ++y)
             {
-                for (int x = (int)blockX - 2; x < blockX + 2; ++x)
+                for (int x = (int)blockX - 5; x < blockX + 5; ++x)
                 {
                     Tile tile = world.tileMap.GetTilePro(x, y);
 
                     if (Raylib.CheckCollisionRecs(hitBox, tile.hitBox))
                     {
-                        return tile.state;
+                        if (tile.state != TileState.VOID)
+                        {
+                            return tile.state;
+                        }
                     }
                 }
             }

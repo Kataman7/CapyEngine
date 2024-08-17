@@ -8,7 +8,7 @@ namespace CapyEngine.WorldNode
         public override void Create()
         {
             landGeneration();
-            //caveGeneration();
+            caveGeneration();
         }
 
         private void landGeneration()

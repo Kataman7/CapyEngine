@@ -11,7 +11,7 @@ namespace CapyEngine.SceneNode
 
         public DuneScene()
         {
-            world = new DuneWorld(100, 100, 30);
+            world = new DuneWorld(100, 100, 25);
             player = new PlatformPlayer(world.tileMap.width / 2, -world.tileMap.height, world);
 
             world.entities.Add(player);
