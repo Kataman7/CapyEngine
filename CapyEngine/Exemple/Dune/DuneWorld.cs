@@ -49,6 +49,7 @@ namespace CapyEngine.Exemple.Dune
 
         public override void Update()
         {
+            tileMap.Update();
             foreach (var entity in entities)
             {
                 entity.Update();

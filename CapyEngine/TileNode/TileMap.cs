@@ -1,5 +1,6 @@
 ﻿using CapyEngine.TileNode;
 using Raylib_CsLo;
+using System.Numerics;
 using static System.Reflection.Metadata.BlobBuilder;
 namespace CapyEngine.TileNode
 {
@@ -85,6 +86,16 @@ namespace CapyEngine.TileNode
                         tile.Draw();
                     }
                 }
+            }
+        }
+
+        public void Update()
+        {
+            if (Raylib.IsMouseButtonDown(MouseButton.MOUSE_BUTTON_LEFT))
+            {
+                Vector2 pos = Raylib.GetScreenToWorld2D(Raylib.GetMousePosition(), GameManager.currentCamera.camera);
+                GetTilePro((int)pos.X / tileSize, (int)pos.Y / tileSize).Destroy();
+                Console.WriteLine(pos.X + " " + pos.Y);
             }
         }
     }

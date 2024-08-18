@@ -33,6 +33,5 @@ namespace CapyEngine.EntityNode.GuiNode
             hitBox.x = pos.X;
             hitBox.y = pos.Y;
         }
-
     }
 }

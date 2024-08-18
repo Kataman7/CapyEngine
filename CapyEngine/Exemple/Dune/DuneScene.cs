@@ -16,7 +16,7 @@ namespace CapyEngine.Exemple.Dune
         {
             world = new DuneWorld(1000, 1000, 30);
             player = new PlatformPlayer(world.tileMap.width / 2, world.tileMap.height / 2, world);
-            cursor = new Cursor((int)(world.tileMap.tileSize * 0.3));
+            cursor = new Cursor((int)(world.tileMap.tileSize * 0.25));
 
             world.entities.Add(player);
             GameManager.currentCamera.target = player;

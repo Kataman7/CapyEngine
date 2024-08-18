@@ -22,7 +22,7 @@ namespace CapyEngine.WorldNode
 
         public virtual void Update()
         {
-
+            tileMap.Update();
         }
 
         public virtual void Draw()

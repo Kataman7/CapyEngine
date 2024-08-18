@@ -3,14 +3,22 @@ using System.Numerics;
 
 namespace CapyEngine.CameraNode
 {
-    public class CameraSmooth: Camera
+    public class CameraSmooth : Camera
     {
         private float velX = 0;
         private float velY = 0;
-        private Vector2 lastPos = new();
-        private float friction = 0.8f;
+        private Vector2 lastTargetPos = new();
+        private float friction = 0.35f;
+        private float lookAheadAmountX = 200f;
+        private float lookAheadAmountY = 200f;
 
         public CameraSmooth(int speed, float zoom) : base(speed, zoom) { }
+
+        public CameraSmooth(int speed, float zoom, float lookAheadAmountX, float lookAheadAmountY) : this(speed, zoom)
+        { 
+            this.lookAheadAmountX = lookAheadAmountX;
+            this.lookAheadAmountY = lookAheadAmountY;
+        }
 
         public void Control()
         {
@@ -21,14 +29,19 @@ namespace CapyEngine.CameraNode
 
             if (followTarget && target != null)
             {
-                float targetX = target.hitBox.x - Raylib.GetScreenWidth() / 2;
-                float targetY = target.hitBox.y - Raylib.GetScreenHeight() / 2;
+                Vector2 direction = new Vector2(target.hitBox.x - lastTargetPos.X, target.hitBox.y - lastTargetPos.Y);
+                Vector2 lookAhead = new(direction.X * lookAheadAmountX, direction.Y * lookAheadAmountY);
 
-                float deltaX = targetX - lastPos.X;
-                float deltaY = targetY - lastPos.Y;
+                float targetX = target.hitBox.x - Raylib.GetScreenWidth() / 2 + lookAhead.X;
+                float targetY = target.hitBox.y - Raylib.GetScreenHeight() / 2 + lookAhead.Y;
 
-                velX += deltaX * 0.45f;
-                velY += deltaY * 0.45f;
+                float deltaX = targetX - camera.target.X;
+                float deltaY = targetY - camera.target.Y;
+
+                velX += deltaX * 0.5f;
+                velY += deltaY * 0.5f;
+
+                lastTargetPos = new Vector2(target.hitBox.x, target.hitBox.y);
             }
             else
             {
@@ -36,23 +49,22 @@ namespace CapyEngine.CameraNode
 
                 if (Raylib.IsKeyDown(KeyboardKey.KEY_A))
                 {
-                    velX -= speed * deltaTime;
+                    camera.target.X -= speed * deltaTime;
                 }
                 if (Raylib.IsKeyDown(KeyboardKey.KEY_D))
                 {
-                    velX += speed * deltaTime;
+                    camera.target.X += speed * deltaTime;
                 }
                 if (Raylib.IsKeyDown(KeyboardKey.KEY_W))
                 {
-                    velY -= speed * deltaTime;
+                    camera.target.Y -= speed * deltaTime;
                 }
                 if (Raylib.IsKeyDown(KeyboardKey.KEY_S))
                 {
-                    velY += speed * deltaTime;
+                    camera.target.Y += speed * deltaTime;
                 }
             }
         }
-
 
         public override void Update()
         {
@@ -72,8 +84,6 @@ namespace CapyEngine.CameraNode
             {
                 velY = 0;
             }
-
-            lastPos = new(camera.target.X, camera.target.Y);
         }
     }
 }

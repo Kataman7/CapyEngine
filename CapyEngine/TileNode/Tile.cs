@@ -22,7 +22,6 @@ namespace CapyEngine.TileNode
 
         public override void Draw()
         {
-            base.Draw();
             Raylib.DrawTexturePro(texture.texture, texture.hitBox, hitBox, origin, 0, Raylib.WHITE);
         }
 
@@ -38,6 +37,13 @@ namespace CapyEngine.TileNode
         public override int GetHashCode()
         {
             return id.GetHashCode();
+        }
+
+        public void Destroy()
+        {
+            id = TileID.VOID;
+            texture = Textures.Get(id);
+            state = TileStates.Get(id);
         }
     }
 }

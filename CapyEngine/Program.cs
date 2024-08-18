@@ -1,11 +1,12 @@
 ﻿using CapyEngine;
+using CapyEngine.TextureNode;
 using Raylib_CsLo;
 
 namespace TerrariaLikeCs
 {
     public static class Program
     {
-        public static async Task Main(string[] args)
+        public static Task Main(string[] args)
         {
             Raylib.InitWindow(1280, 720, "CapyEngine");
 
@@ -16,6 +17,8 @@ namespace TerrariaLikeCs
             }
 
             Raylib.CloseWindow();
+            Textures.UnloadTexture();
+            return Task.CompletedTask;
         }
     }
 }

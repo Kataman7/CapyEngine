@@ -6,7 +6,7 @@ namespace CapyEngine
 {
     public static class GameManager
     {
-        public static Camera currentCamera = new CameraSmooth(10000, 1f);
+        public static Camera currentCamera = new CameraSmooth(10000, 1f, 150f, 50f);
         public static IScene currentScene = new DuneScene();
     }
 }
