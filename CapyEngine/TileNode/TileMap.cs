@@ -26,6 +26,45 @@ namespace CapyEngine.TileNode
                 }
             }
         }
+        public TileMap(string filePath)
+        {
+            using (StreamReader reader = new StreamReader(filePath))
+            {
+                string[] header = reader.ReadLine().Split(' ');
+                width = int.Parse(header[0]);
+                height = int.Parse(header[1]);
+                tileSize = int.Parse(header[2]);
+
+                tiles = new Tile[width * height];
+
+                for (int y = 0; y < height; y++)
+                {
+                    string[] line = reader.ReadLine().Split(' ');
+                    for (int x = 0; x < width; x++)
+                    {
+                        TileID tileID = (TileID)int.Parse(line[x]);
+                        SetTile(x, y, tileID);
+                    }
+                }
+            }
+        }
+
+        public void SaveToFile(string filePath)
+        {
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+                writer.WriteLine($"{width} {height} {tileSize}");
+
+                for (int y = 0; y < height; y++)
+                {
+                    for (int x = 0; x < width; x++)
+                    {
+                        writer.Write((int)GetTile(x, y).id + " ");
+                    }
+                    writer.WriteLine();
+                }
+            }
+        }
 
         public Tile GetTile(int x, int y)
         {
@@ -96,6 +135,13 @@ namespace CapyEngine.TileNode
                 Vector2 pos = Raylib.GetScreenToWorld2D(Raylib.GetMousePosition(), GameManager.currentCamera.camera);
                 GetTilePro((int)pos.X / tileSize, (int)pos.Y / tileSize).Destroy();
                 Console.WriteLine(pos.X + " " + pos.Y);
+            }
+            if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT_CONTROL))
+            {
+                if (Raylib.IsKeyPressed(KeyboardKey.KEY_S))
+                {
+                    SaveToFile("save");
+                }
             }
         }
     }
