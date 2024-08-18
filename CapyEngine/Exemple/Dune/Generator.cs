@@ -1,7 +1,7 @@
 ﻿using CapyEngine.TileNode;
 using Raylib_CsLo.InternalHelpers;
 
-namespace TerrariaLikeCs
+namespace CapyEngine.Exemple.Dune
 {
     public class ConwayRule
     {
@@ -120,7 +120,7 @@ namespace TerrariaLikeCs
 
             for (int i = 0; i < width; i++)
             {
-                altitude[i] = (int)((Math.Sin(x) * height)) + bias;
+                altitude[i] = (int)(Math.Sin(x) * height) + bias;
                 x += drop;
             }
 

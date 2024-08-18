@@ -27,9 +27,9 @@ namespace CapyEngine.EntityNode.DynamicEntityNode
             float blockX = hitBox.x / world.tileMap.tileSize;
             float blockY = hitBox.y / world.tileMap.tileSize;
 
-            for (int y = (int)blockY - 5; y < blockY + 5; ++y)
+            for (int y = (int)blockY - 2; y < blockY + 2; ++y)
             {
-                for (int x = (int)blockX - 5; x < blockX + 5; ++x)
+                for (int x = (int)blockX - 2; x < blockX + 2; ++x)
                 {
                     Tile tile = world.tileMap.GetTilePro(x, y);
 
@@ -50,6 +50,8 @@ namespace CapyEngine.EntityNode.DynamicEntityNode
             float previousX = hitBox.x;
             float previousY = hitBox.y;
 
+            float friction = 0.95f;
+
             velY += weight * Raylib.GetFrameTime();
             hitBox.y += velY * Raylib.GetFrameTime();
 
@@ -69,12 +71,20 @@ namespace CapyEngine.EntityNode.DynamicEntityNode
 
             // faudra addapter pour n'importe quel type d'fps avec un timer 
 
-            float friction = 0.95f;
             velX *= friction;
 
             if (Math.Abs(velX) < 0.01f)
             {
                 velX = 0;
+            }
+
+            if (weight == 0)
+            {
+                velY *= friction;
+                if (Math.Abs(velX) < 0.01f)
+                {
+                    velX = 0;
+                }
             }
         }
     }

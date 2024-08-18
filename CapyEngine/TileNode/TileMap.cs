@@ -72,8 +72,8 @@ namespace CapyEngine.TileNode
             int width = halfScreenW / tileSize + 2;
             int height = halfScreenH / tileSize + 2;
 
-            float blockX = (Game.currentCamera.camera.target.X + halfScreenW) / tileSize;
-            float blockY = (Game.currentCamera.camera.target.Y + halfScreenH) / tileSize;
+            float blockX = (GameManager.currentCamera.camera.target.X + halfScreenW) / tileSize;
+            float blockY = (GameManager.currentCamera.camera.target.Y + halfScreenH) / tileSize;
 
             for (int y = (int)blockY - height; y < blockY + height; ++y)
             {

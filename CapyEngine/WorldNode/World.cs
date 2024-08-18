@@ -27,7 +27,7 @@ namespace CapyEngine.WorldNode
 
         public virtual void Draw()
         {
-            tileMap.Draw();
+            tileMap.DrawPro();
         }
 
     }

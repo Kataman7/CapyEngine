@@ -1,4 +1,5 @@
 ﻿using CapyEngine.EntityNode;
+using CapyEngine.EntityNode.DynamicEntityNode;
 using Raylib_CsLo;
 
 namespace CapyEngine.CameraNode
@@ -6,11 +7,11 @@ namespace CapyEngine.CameraNode
     public class Camera
     {
         public Camera2D camera;
-        private int speed;
+        public int speed;
         public Entity ?target;
         public bool followTarget;
 
-        public Camera(int speed, float zoom)
+        public Camera(int speed, float zoom) 
         {
             camera = new Camera2D();
             camera.zoom = zoom;
@@ -19,13 +20,12 @@ namespace CapyEngine.CameraNode
             target = null;
         }
 
-
         public Camera(Entity target, int speed, float zoom) : this(speed, zoom)
         {
             this.target = target;
         }
 
-        public void Update()
+        public virtual void Update()
         {
 
             if (Raylib.IsKeyPressed(KeyboardKey.KEY_ENTER))
@@ -33,7 +33,7 @@ namespace CapyEngine.CameraNode
                 followTarget = !followTarget;
             }
 
-            if (followTarget && target != null)
+            if (followTarget)
             {
                 camera.target.X = target.hitBox.x - Raylib.GetScreenWidth() / 2;
                 camera.target.Y = target.hitBox.y - Raylib.GetScreenHeight() / 2;

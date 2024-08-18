@@ -11,8 +11,8 @@ namespace TerrariaLikeCs
 
             while (!Raylib.WindowShouldClose())
             {
-                Game.currentScene.Update();
-                Game.currentScene.Draw();
+                GameManager.currentScene.Update();
+                GameManager.currentScene.Draw();
             }
 
             Raylib.CloseWindow();

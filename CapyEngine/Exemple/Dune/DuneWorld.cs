@@ -1,7 +1,7 @@
-﻿using TerrariaLikeCs;
-using CapyEngine.TileNode;
+﻿using CapyEngine.TileNode;
+using CapyEngine.WorldNode;
 
-namespace CapyEngine.WorldNode
+namespace CapyEngine.Exemple.Dune
 {
     public class DuneWorld(int width, int height, int tileSize) : World(width, height, tileSize)
     {
