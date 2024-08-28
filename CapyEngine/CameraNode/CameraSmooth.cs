@@ -1,4 +1,5 @@
-﻿using Raylib_CsLo;
+﻿using CapyEngine.EntityNode;
+using Raylib_CsLo;
 using System.Numerics;
 
 namespace CapyEngine.CameraNode
@@ -14,7 +15,7 @@ namespace CapyEngine.CameraNode
 
         public CameraSmooth(int speed, float zoom) : base(speed, zoom) { }
 
-        public CameraSmooth(int speed, float zoom, float lookAheadAmountX, float lookAheadAmountY) : this(speed, zoom)
+        public CameraSmooth(Entity target, int speed, float zoom, float lookAheadAmountX, float lookAheadAmountY) : base(target, speed, zoom)
         { 
             this.lookAheadAmountX = lookAheadAmountX;
             this.lookAheadAmountY = lookAheadAmountY;

@@ -1,7 +1,7 @@
-﻿using CapyEngine.TileNode;
+﻿using CapyEngine.UtilNode;
+using CapyEngine.UtilsNode;
 using Raylib_CsLo;
 using System.Numerics;
-using static System.Reflection.Metadata.BlobBuilder;
 namespace CapyEngine.TileNode
 {
     public class TileMap
@@ -22,7 +22,7 @@ namespace CapyEngine.TileNode
             {
                 for (int x = 0; x < width; x++)
                 {
-                    SetTile(x, y, TileID.VOID);
+                    SetTile(x, y, ObjectID.VOID);
                 }
             }
         }
@@ -42,7 +42,7 @@ namespace CapyEngine.TileNode
                     string[] line = reader.ReadLine().Split(' ');
                     for (int x = 0; x < width; x++)
                     {
-                        TileID tileID = (TileID)int.Parse(line[x]);
+                        ObjectID tileID = (ObjectID)int.Parse(line[x]);
                         SetTile(x, y, tileID);
                     }
                 }
@@ -78,12 +78,12 @@ namespace CapyEngine.TileNode
             return GetTile(x, y);
         }
 
-        public void SetTile(int x, int y, TileID tileID)
+        public void SetTile(int x, int y, ObjectID tileID)
         {
             tiles[y * width + x] = new Tile(tileID, x, y, tileSize);
         }
 
-        public void SetTilePro(int x, int y, TileID tileID)
+        public void SetTilePro(int x, int y, ObjectID tileID)
         {
             x = ((x % width) + width) % width;
             y = ((y % height) + height) % height;
@@ -96,7 +96,7 @@ namespace CapyEngine.TileNode
             {
                 for (int x = 0; x < width; x++)
                 {
-                    if (GetTile(x, y).id != TileID.VOID)
+                    if (GetTile(x, y).id != ObjectID.VOID)
                     {
                         GetTile(x, y).Draw();
                     }
@@ -120,7 +120,7 @@ namespace CapyEngine.TileNode
                 for (int x = (int)blockX - width; x < blockX + width; ++x)
                 {
                     Tile tile = GetTilePro(x, y);
-                    if (tile.id != TileID.VOID)
+                    if (tile.id != ObjectID.VOID)
                     {
                         tile.Draw();
                     }
@@ -134,7 +134,6 @@ namespace CapyEngine.TileNode
             {
                 Vector2 pos = Raylib.GetScreenToWorld2D(Raylib.GetMousePosition(), GameManager.currentCamera.camera);
                 GetTilePro((int)pos.X / tileSize, (int)pos.Y / tileSize).Destroy();
-                Console.WriteLine(pos.X + " " + pos.Y);
             }
             if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT_CONTROL))
             {

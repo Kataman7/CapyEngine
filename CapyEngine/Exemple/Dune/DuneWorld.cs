@@ -1,4 +1,4 @@
-﻿using CapyEngine.TileNode;
+﻿using CapyEngine.UtilsNode;
 using CapyEngine.WorldNode;
 
 namespace CapyEngine.Exemple.Dune
@@ -21,19 +21,19 @@ namespace CapyEngine.Exemple.Dune
                 {
                     if (y == altitude[x])
                     {
-                        tileMap.SetTile(x, y, TileID.DIRT_GRASS);
+                        tileMap.SetTile(x, y, ObjectID.DIRT_GRASS);
                     }
                     else if (y > altitude[x] && y < altitude[x] + 3)
                     {
-                        tileMap.SetTile(x, y, TileID.DIRT);
+                        tileMap.SetTile(x, y, ObjectID.DIRT);
                     }
                     else if (y >= altitude[x] + 3 && y < altitude[x] + 6)
                     {
-                        tileMap.SetTile(x, y, TileID.STONE);
+                        tileMap.SetTile(x, y, ObjectID.STONE);
                     }
                     else if (y >= altitude[x] + 6)
                     {
-                        Generator.RandomTileGeneration(tileMap, x, y, 0.5f, TileID.STONE, TileID.VOID, null);
+                        Generator.RandomTileGeneration(tileMap, x, y, 0.5f, ObjectID.STONE, ObjectID.VOID, null);
                     }
                 }
             }
@@ -43,7 +43,7 @@ namespace CapyEngine.Exemple.Dune
         {
             for (int i = 0; i < 10; i++)
             {
-                Generator.NextCaveGeneration(tileMap, TileID.STONE, TileID.VOID);
+                Generator.NextCaveGeneration(tileMap, ObjectID.STONE, ObjectID.VOID);
             }
         }
 

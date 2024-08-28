@@ -12,5 +12,17 @@ namespace CapyEngine.TextureNode
             hitBox.width = texture.width;
             hitBox.height = texture.height;
         }
+
+        public virtual void Unload()
+        {
+            Raylib.UnloadTexture(texture);
+        }
+
+        public override void Update()
+        {
+
+        }
     }
+
+   
 }

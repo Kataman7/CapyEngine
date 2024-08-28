@@ -1,27 +1,33 @@
-﻿using CapyEngine.TileNode;
+﻿using CapyEngine.UtilNode;
+using CapyEngine.UtilsNode;
 using Raylib_CsLo;
 
 namespace CapyEngine.TextureNode
 {
     public static class Textures
     {
-        private static Dictionary<TileID, Texture> list;
+        private static Dictionary<ObjectID, Texture> list;
         private static String root;
 
         static Textures()
         {
-            root = "resources/textures/";
+            root = "resources/textures/blocks/";
 
-            list = new Dictionary<TileID, Texture> ()
+            list = new Dictionary<ObjectID, Texture> ()
             {
-                { TileID.DIRT_GRASS, new Texture(root + "dirt_grass.png") },
-                { TileID.DIRT, new Texture(root + "dirt.png") },
-                { TileID.STONE, new Texture(root + "stone.png") },
-                { TileID.VOID, new Texture(root + "void.png") }
+                { ObjectID.DIRT_GRASS, new Texture(root + "dirt_grass.png") },
+                { ObjectID.DIRT, new Texture(root + "dirt.png") },
+                { ObjectID.STONE, new Texture(root + "stone.png") },
+                { ObjectID.VOID, new Texture(root + "void.png") }
             };
+
+            root = "resources/textures/player/";
+
+            list.Add(ObjectID.PLAYER_IDLE, new AnimatedTexture(root + "idle_", 4, 0.1f));
+            list.Add(ObjectID.PLAYER_RUN, new AnimatedTexture(root + "run_", 4, 0.1f));
         }
 
-        public static Texture Get(TileID tileID)
+        public static Texture Get(ObjectID tileID)
         {
             return list[tileID];
         }
@@ -30,7 +36,7 @@ namespace CapyEngine.TextureNode
         {
             foreach (var texture in list)
             {
-                Raylib.UnloadTexture(texture.Value.texture);
+                texture.Value.Unload();
             }
         }
     }

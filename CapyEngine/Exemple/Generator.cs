@@ -1,7 +1,7 @@
 ﻿using CapyEngine.TileNode;
-using Raylib_CsLo.InternalHelpers;
+using CapyEngine.UtilsNode;
 
-namespace CapyEngine.Exemple.Dune
+namespace CapyEngine.Exemple
 {
     public class ConwayRule
     {
@@ -26,7 +26,7 @@ namespace CapyEngine.Exemple.Dune
 
         public static Random random = new Random();
 
-        public static void RandomTileGeneration(TileMap tileMap, int x, int y, float chanceToLive, TileID livingValue, TileID deadValue, TileID? conditionValue)
+        public static void RandomTileGeneration(TileMap tileMap, int x, int y, float chanceToLive, ObjectID livingValue, ObjectID deadValue, ObjectID? conditionValue)
         {
             if (conditionValue == null || tileMap.GetTile(x, y).id == conditionValue)
             {
@@ -41,7 +41,7 @@ namespace CapyEngine.Exemple.Dune
             }
         }
 
-        public static void RandomGridGeneration(TileMap tileMap, float chanceToLive, TileID livingValue, TileID deadValue, TileID? conditionValue)
+        public static void RandomGridGeneration(TileMap tileMap, float chanceToLive, ObjectID livingValue, ObjectID deadValue, ObjectID? conditionValue)
         {
             for (int y = 0; y < tileMap.height; y++)
             {
@@ -52,7 +52,7 @@ namespace CapyEngine.Exemple.Dune
             }
         }
 
-        public static int CountNeighbor(TileMap tileMap, TileID neighbor, int x, int y)
+        public static int CountNeighbor(TileMap tileMap, ObjectID neighbor, int x, int y)
         {
             int count = 0;
 
@@ -76,7 +76,7 @@ namespace CapyEngine.Exemple.Dune
             return count;
         }
 
-        public static int[,] CreateNeighborsGrid(TileMap tileMap, TileID livingValue)
+        public static int[,] CreateNeighborsGrid(TileMap tileMap, ObjectID livingValue)
         {
             int[,] neighborsGrid = new int[tileMap.width, tileMap.height];
 
@@ -91,7 +91,7 @@ namespace CapyEngine.Exemple.Dune
             return neighborsGrid;
         }
 
-        public static void NextCaveGeneration(TileMap tileMap, TileID livingValue, TileID deadValue)
+        public static void NextCaveGeneration(TileMap tileMap, ObjectID livingValue, ObjectID deadValue)
         {
             int[,] neighborsGrid = CreateNeighborsGrid(tileMap, livingValue);
 

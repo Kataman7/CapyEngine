@@ -2,17 +2,18 @@
 using System.Numerics;
 using CapyEngine.TextureNode;
 using Raylib_CsLo;
+using CapyEngine.UtilsNode;
 
 namespace CapyEngine.TileNode
 {
     public class Tile : Entity
     {
-        public TileID id;
+        public ObjectID id;
         public TileState state;
         private Vector2 origin;
         private TextureNode.Texture texture;
 
-        public Tile(TileID id, int x, int y, int size) : base(x*size, y*size, 1, 1, size)
+        public Tile(ObjectID id, int x, int y, int size) : base(x*size, y*size, 1, 1, size)
         {
             this.id = id;
             origin = new Vector2(0, 0);
@@ -41,7 +42,7 @@ namespace CapyEngine.TileNode
 
         public void Destroy()
         {
-            id = TileID.VOID;
+            id = ObjectID.VOID;
             texture = Textures.Get(id);
             state = TileStates.Get(id);
         }

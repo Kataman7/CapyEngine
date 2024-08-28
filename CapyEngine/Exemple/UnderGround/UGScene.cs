@@ -1,30 +1,25 @@
 ﻿using CapyEngine.EntityNode.DynamicEntityNode.SpriteNode;
+using CapyEngine.Exemple.Dune;
 using CapyEngine.SceneNode;
+using CapyEngine.UtilNode;
 using CapyEngine.WorldNode;
 using Raylib_CsLo;
-using CapyEngine.CameraNode;
-using CapyEngine.UtilNode;
+using System.Numerics;
 
-namespace CapyEngine.Exemple.Dune
+namespace CapyEngine.Exemple.UnderGround
 {
-    public class DuneScene : IScene
+    public class UGScene : IScene
     {
         private World world;
-        private PlatformPlayer player;
-        private BasicMonster monster;
+        private RPGPlayer player;
 
-        public DuneScene()
+        public UGScene()
         {
             world = new DuneWorld(1000, 1000, 30);
-            player = new PlatformPlayer((world.tileMap.width / 2)*world.tileMap.tileSize, -world.tileMap.tileSize*20, world);
-            monster = new BasicMonster(0, 0, world);
-
-            //GameManager.currentCamera = new CameraSmooth(player, 10000, 1f, 350, 150);
-
-            GameManager.currentCamera.target = player;
-
+            player = new RPGPlayer(0, 0, world);
+            GameManager.currentCamera.camera.target = new Vector2(player.hitBox.x, player.hitBox.y);
             world.entities.Add(player);
-            world.entities.Add(monster);
+            GameManager.currentCamera.target = player;
             Raylib.SetTargetFPS(240);
         }
 

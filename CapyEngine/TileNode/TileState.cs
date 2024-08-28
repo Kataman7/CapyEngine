@@ -1,4 +1,5 @@
-﻿using Raylib_CsLo;
+﻿using CapyEngine.UtilsNode;
+using Raylib_CsLo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,20 +15,20 @@ namespace CapyEngine.TileNode
 
     public static class TileStates
     {
-        private static Dictionary<TileID, TileState> list;
+        private static Dictionary<ObjectID, TileState> list;
 
         static TileStates()
         {
-           list = new Dictionary<TileID, TileState>()
+           list = new Dictionary<ObjectID, TileState>()
            {
-                { TileID.VOID, TileState.VOID },
-                { TileID.DIRT, TileState.SOLID },
-                { TileID.DIRT_GRASS, TileState.SOLID },
-                { TileID.STONE, TileState.SOLID }
+                { ObjectID.VOID, TileState.VOID },
+                { ObjectID.DIRT, TileState.SOLID },
+                { ObjectID.DIRT_GRASS, TileState.SOLID },
+                { ObjectID.STONE, TileState.SOLID }
            };
         }
 
-        public static TileState Get(TileID tileID)
+        public static TileState Get(ObjectID tileID)
         {
             return list[tileID];
         }
