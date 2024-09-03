@@ -19,6 +19,8 @@ namespace CapyEngine.CameraNode
         { 
             this.lookAheadAmountX = lookAheadAmountX;
             this.lookAheadAmountY = lookAheadAmountY;
+            camera.target.X = target.hitBox.X;
+            camera.target.Y = target.hitBox.Y;
         }
 
         public void Control()

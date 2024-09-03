@@ -130,11 +130,6 @@ namespace CapyEngine.TileNode
 
         public void Update()
         {
-            if (Raylib.IsMouseButtonDown(MouseButton.MOUSE_BUTTON_LEFT))
-            {
-                Vector2 pos = Raylib.GetScreenToWorld2D(Raylib.GetMousePosition(), GameManager.currentCamera.camera);
-                GetTilePro((int)pos.X / tileSize, (int)pos.Y / tileSize).Destroy();
-            }
             if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT_CONTROL))
             {
                 if (Raylib.IsKeyPressed(KeyboardKey.KEY_S))

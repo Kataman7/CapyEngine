@@ -23,8 +23,9 @@ namespace CapyEngine.TextureNode
 
             root = "resources/textures/player/";
 
-            list.Add(ObjectID.PLAYER_IDLE, new AnimatedTexture(root + "idle_", 4, 0.1f));
-            list.Add(ObjectID.PLAYER_RUN, new AnimatedTexture(root + "run_", 4, 0.1f));
+            list.Add(ObjectID.PLAYER_IDLE, new AnimatedTexture(root + "idle", 4, 0.1f));
+            list.Add(ObjectID.PLAYER_RUN, new AnimatedTexture(root + "run", 4, 0.1f));
+            list.Add(ObjectID.PLAYER_JUMP, new AnimatedTexture(root + "jump", 7, 0.1f));
         }
 
         public static Texture Get(ObjectID tileID)

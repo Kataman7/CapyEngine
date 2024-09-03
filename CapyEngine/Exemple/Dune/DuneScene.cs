@@ -4,6 +4,7 @@ using CapyEngine.WorldNode;
 using Raylib_CsLo;
 using CapyEngine.CameraNode;
 using CapyEngine.UtilNode;
+using CapyEngine.GeneratorNode;
 
 namespace CapyEngine.Exemple.Dune
 {
@@ -19,13 +20,14 @@ namespace CapyEngine.Exemple.Dune
             player = new PlatformPlayer((world.tileMap.width / 2)*world.tileMap.tileSize, -world.tileMap.tileSize*20, world);
             monster = new BasicMonster(0, 0, world);
 
-            //GameManager.currentCamera = new CameraSmooth(player, 10000, 1f, 350, 150);
-
+            //GameManager.currentCamera = new CameraSmooth(player, 1000, 1f, 350, 150);
             GameManager.currentCamera.target = player;
 
             world.entities.Add(player);
             world.entities.Add(monster);
             Raylib.SetTargetFPS(240);
+
+            DuneGenerator.noisemap();
         }
 
         public void Update()
@@ -39,6 +41,7 @@ namespace CapyEngine.Exemple.Dune
         {
             Raylib.BeginDrawing();
             Raylib.ClearBackground(Raylib.RAYWHITE);
+
             Raylib.BeginMode2D(GameManager.currentCamera.camera);
 
             world.Draw();

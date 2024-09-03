@@ -4,6 +4,8 @@ using CapyEngine.TileNode;
 using CapyEngine.TextureNode;
 using CapyEngine.UtilsNode;
 using System.Numerics;
+using CapyEngine.UtilNode;
+using CapyEngine.InventoryNode;
 
 namespace CapyEngine.EntityNode.DynamicEntityNode.SpriteNode
 {
@@ -16,8 +18,10 @@ namespace CapyEngine.EntityNode.DynamicEntityNode.SpriteNode
         private TextureNode.Texture texture;
         private Vector2 origin;
         private int direction;
+        private Rectangle body;
+        public Inventory inventory;
 
-        public PlatformPlayer(int x, int y, World world) : base(x, y, 2, 3, 10, 1300, world)
+        public PlatformPlayer(int x, int y, World world) : base(x, y, 1.25f, 2.625f, 10, 1300, world)
         {
             jumpCount = 0;
             jumpPower = 600;
@@ -26,11 +30,13 @@ namespace CapyEngine.EntityNode.DynamicEntityNode.SpriteNode
             texture = Textures.Get(ObjectID.PLAYER_IDLE);
             origin = new Vector2(0, 0);
             direction = 1;
+            body = new Rectangle(x, y, 2 * world.tileMap.tileSize, 3 * world.tileMap.tileSize);
+            inventory = new Inventory(10);
         }
         private void Moove(int direction)
         {
             //hitBox.x += speed * direction * Raylib.GetFrameTime();
-            velX += speed * direction * Raylib.GetFrameTime();;
+            velX += speed * direction * Raylib.GetFrameTime(); ;
         }
         private void Jump()
         {
@@ -40,6 +46,16 @@ namespace CapyEngine.EntityNode.DynamicEntityNode.SpriteNode
                 jumpCount++;
             }
         }
+
+        private void Destroy()
+        {
+
+            Vector2 pos = Raylib.GetScreenToWorld2D(Raylib.GetMousePosition(), GameManager.currentCamera.camera);
+            world.tileMap.GetTilePro((int)pos.X / world.tileMap.tileSize, (int)pos.Y / world.tileMap.tileSize).Destroy(world);
+            // for terraria like game
+
+        }
+
         private void Control()
         {
             if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
@@ -54,18 +70,30 @@ namespace CapyEngine.EntityNode.DynamicEntityNode.SpriteNode
             {
                 Moove(-1);
             }
+            if (Raylib.IsMouseButtonDown(MouseButton.MOUSE_BUTTON_LEFT))
+            {
+                Destroy();
+            }
         }
         public override void Update()
         {
             Control();
 
-            if (velX == 0)
+            if (velY < -1 || velY > 1)
+            {
+                texture = Textures.Get(ObjectID.PLAYER_JUMP);
+            }
+            else if (velX == 0)
             {
                 texture = Textures.Get(ObjectID.PLAYER_IDLE);
             }
             else
             {
                 texture = Textures.Get(ObjectID.PLAYER_RUN);
+            }
+
+            if (velX != 0)
+            {
                 direction = velX < 0 ? -1 : 1;
             }
 
@@ -102,18 +130,16 @@ namespace CapyEngine.EntityNode.DynamicEntityNode.SpriteNode
             {
                 velX = 0;
             }
+
+            body.x = hitBox.x - 3 * (world.tileMap.tileSize / 8);
+            body.y = hitBox.y - 3 * (world.tileMap.tileSize / 8);
         }
 
         public override void Draw()
         {
-
-            bool movingLeft = velX < 0;
-            bool movingRight = velX > 0;
-
-            // Définir le rectangle source pour la texture
-            Rectangle sourceRec  = new Rectangle(0, 0, direction * texture.texture.width, texture.texture.height);
-
-            Raylib.DrawTexturePro(texture.texture, sourceRec, hitBox, origin, 0, Raylib.WHITE);
+            Rectangle sourceRec = new Rectangle(0, 0, direction * texture.texture.width, texture.texture.height);
+            Raylib.DrawTexturePro(texture.texture, sourceRec, body, origin, 0, Raylib.WHITE);
+            //base.Draw
         }
     }
 }

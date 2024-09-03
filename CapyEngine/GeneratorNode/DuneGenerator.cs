@@ -1,7 +1,10 @@
 ﻿using CapyEngine.TileNode;
 using CapyEngine.UtilsNode;
+using SharpNoise;
+using SharpNoise.Builders;
+using SharpNoise.Modules;
 
-namespace CapyEngine.Exemple
+namespace CapyEngine.GeneratorNode
 {
     public class ConwayRule
     {
@@ -20,8 +23,7 @@ namespace CapyEngine.Exemple
         public static ConwayRule conway = new ConwayRule(2, 3, 3);
     }
 
-
-    public static class Generator
+    public static class DuneGenerator
     {
 
         public static Random random = new Random();
@@ -125,6 +127,45 @@ namespace CapyEngine.Exemple
             }
 
             return altitude;
+        }
+
+        public static void noisemap()
+        {
+            // The noise source - a simple Perlin noise generator will do for this sample
+            var noiseSource = new Perlin
+            {
+                Seed = new Random().Next()
+            };
+
+            // Create a new, empty, noise map and initialize a new planar noise map builder with it
+            var noiseMap = new NoiseMap();
+            var noiseMapBuilder = new PlaneNoiseMapBuilder
+            {
+                DestNoiseMap = noiseMap,
+                SourceModule = noiseSource
+            };
+
+            // Set the size of the noise map
+            noiseMapBuilder.SetDestSize(10, 10);
+
+            // Set the bounds of the noise mpa builder
+            // These are the coordinates in the noise source from which noise values will be sampled
+            noiseMapBuilder.SetBounds(-3, 3, -2, 2);
+
+            // Build the noise map - samples values from the noise module above,
+            // using the bounds coordinates we have passed in the builder
+            noiseMapBuilder.Build();
+
+            // Create a new image and image renderer
+
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    Console.WriteLine(noiseMap.GetValue(i, j));
+                }
+            }
+
         }
     }
 }

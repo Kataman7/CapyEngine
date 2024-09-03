@@ -10,21 +10,24 @@
             this.maxItem = maxItem;
         }
 
-        public void Add(Item item)
+        public bool Add(Item item)
         {
             Item? existingItem = list.FirstOrDefault(i => i.Equals(item) && i.quantity < i.quantityMax);
 
             if (existingItem != null)
             {
                 existingItem.Combine(item);
+                return true;
             }
-            else if (list.LongCount() < maxItem)
+            else if (list.Count() < maxItem)
             {
                 list.Add(item);
+                return true;
             }
+            return false;
         }
 
-        public void Remove(Item item, int quantity)
+        public bool Remove(Item item, int quantity)
         {
             item.quantity = -quantity;
 
@@ -36,7 +39,9 @@
                 {
                     list.Remove(existingItem);
                 }
+                return true;
             }
+            return false;
         }
             
     }

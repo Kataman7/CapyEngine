@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="Raylib-CsLo" Version="4.2.0.9" />
+    <PackageReference Include="SharpNoise" Version="0.12.1.1" />
   </ItemGroup>
 
 </Project>

@@ -2,6 +2,6 @@
 {
     public enum ObjectID
     {
-        VOID, STONE, DIRT, DIRT_GRASS, PLAYER_IDLE, PLAYER_RUN
+        VOID, STONE, DIRT, DIRT_GRASS, PLAYER_IDLE, PLAYER_RUN, PLAYER_JUMP
     }
 }
