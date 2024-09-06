@@ -139,6 +139,7 @@ namespace CapyEngine.EntityNode.DynamicEntityNode.SpriteNode
         {
             Rectangle sourceRec = new Rectangle(0, 0, direction * texture.texture.width, texture.texture.height);
             Raylib.DrawTexturePro(texture.texture, sourceRec, body, origin, 0, Raylib.WHITE);
+            //inventory.Draw();
             //base.Draw
         }
     }

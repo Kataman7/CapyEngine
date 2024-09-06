@@ -6,7 +6,7 @@ using System.Numerics;
 using CapyEngine.TileNode;
 using CapyEngine.EntityNode.DynamicEntityNode.SpriteNode;
 using CapyEngine.TextureNode;
-using CapyEngine.UtilNode;
+using CapyEngine.UtilsNode;
 
 namespace CapyEngine.Exemple.Dune
 {
@@ -52,7 +52,7 @@ namespace CapyEngine.Exemple.Dune
                 {
                     if (Raylib.CheckCollisionRecs(player.hitBox, hitBox))
                     {
-                        if (player.inventory.Add(new Item(stuff.id, 1000))) alive = false;
+                        if (player.inventory.Add(new Item(stuff.id, 100))) alive = false;
                     }
                 }
             }

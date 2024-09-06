@@ -1,5 +1,4 @@
-﻿using CapyEngine.EntityNode;
-using CapyEngine.GeneratorNode;
+﻿using CapyEngine.GeneratorNode.TileMapGenerator;
 using CapyEngine.UtilsNode;
 using CapyEngine.WorldNode;
 
@@ -15,7 +14,7 @@ namespace CapyEngine.Exemple.Dune
 
         private void landGeneration()
         {
-            int[] altitude = DuneGenerator.altitudeGeneration(tileMap.width, 5, 0.16f, 20);
+            int[] altitude = WorldGenerator.altitudeGeneration(tileMap.width, 5, 0.16f, 20);
 
             for (int x = 0; x < tileMap.width; x++)
             {
@@ -35,7 +34,7 @@ namespace CapyEngine.Exemple.Dune
                     }
                     else if (y >= altitude[x] + 6)
                     {
-                        DuneGenerator.RandomTileGeneration(tileMap, x, y, 0.5f, ObjectID.STONE, ObjectID.VOID, null);
+                        RandomGenerator.RandomTileGeneration(tileMap, x, y, 0.51f, ObjectID.STONE, ObjectID.VOID, null);
                     }
                 }
             }
@@ -45,7 +44,7 @@ namespace CapyEngine.Exemple.Dune
         {
             for (int i = 0; i < 15; i++)
             {
-                DuneGenerator.NextCaveGeneration(tileMap, ObjectID.STONE, ObjectID.VOID);
+                WorldGenerator.NextCaveGeneration(tileMap, ObjectID.STONE, ObjectID.VOID);
             }
         }
 

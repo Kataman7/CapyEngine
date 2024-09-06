@@ -43,6 +43,13 @@
             }
             return false;
         }
-            
+
+        public void Draw()
+        {
+            foreach (Item item in list)
+            {
+                Console.WriteLine(item.id + " " + item.quantity);
+            }
+        }
     }
 }

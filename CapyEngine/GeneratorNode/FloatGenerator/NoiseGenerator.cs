@@ -3,9 +3,9 @@ using SharpNoise.Modules;
 using SharpNoise;
 using System.Runtime.InteropServices;
 
-namespace CapyEngine.GeneratorNode
+namespace CapyEngine.GeneratorNode.FloatGenerator
 {
-    internal class NoiseGenerator: Generator
+    internal class NoiseGenerator : IFloatGenerator
     {
         private Perlin noiseSource;
         private NoiseMap noiseMap;

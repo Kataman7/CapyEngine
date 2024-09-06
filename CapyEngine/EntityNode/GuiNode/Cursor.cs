@@ -1,7 +1,7 @@
 ﻿using Raylib_CsLo;
 using System.Numerics;
 using CapyEngine.CameraNode;
-using CapyEngine.UtilNode;
+using CapyEngine.UtilsNode;
 
 namespace CapyEngine.EntityNode.GuiNode
 {

@@ -1,5 +1,5 @@
 ﻿using CapyEngine.TextureNode;
-using CapyEngine.UtilNode;
+using CapyEngine.UtilsNode;
 using Raylib_CsLo;
 
 namespace TerrariaLikeCs

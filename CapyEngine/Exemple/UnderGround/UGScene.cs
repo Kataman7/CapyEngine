@@ -1,7 +1,7 @@
 ﻿using CapyEngine.EntityNode.DynamicEntityNode.SpriteNode;
 using CapyEngine.Exemple.Dune;
 using CapyEngine.SceneNode;
-using CapyEngine.UtilNode;
+using CapyEngine.UtilsNode;
 using CapyEngine.WorldNode;
 using Raylib_CsLo;
 using System.Numerics;

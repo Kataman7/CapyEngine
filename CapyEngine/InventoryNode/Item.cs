@@ -14,13 +14,19 @@ namespace CapyEngine.InventoryNode
         {
             this.id = id;
             texture = Textures.Get(id);
-            quantity = quantityMax;
+            quantity = 1;
+            this.quantityMax = quantityMax;
         }
 
         public void Combine(Item item)
         {
             quantity += item.quantity;
             item.quantity = 0;
+        }
+
+        public bool Equals(Item item)
+        {
+            return id == item.id;
         }
     }
 }

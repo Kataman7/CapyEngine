@@ -5,10 +5,11 @@ using CapyEngine.TileNode;
 using CapyEngine.EntityNode.GuiNode;
 using System.Numerics;
 
-namespace CapyEngine.UtilNode
+namespace CapyEngine.UtilsNode
 {
     public static class GameManager
     {
+        public static Random random = new Random();
         public static Camera currentCamera = new Camera(1000, 1f);
         public static IScene currentScene = new DuneScene();
         public static Cursor currentCursor = new Cursor(5);
