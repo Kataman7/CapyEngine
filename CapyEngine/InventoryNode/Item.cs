@@ -13,7 +13,7 @@ namespace CapyEngine.InventoryNode
         public Item(ObjectID id, int quantityMax)
         {
             this.id = id;
-            texture = Textures.Get(id);
+            texture = TexturesFactory.Get(id);
             quantity = 1;
             this.quantityMax = quantityMax;
         }

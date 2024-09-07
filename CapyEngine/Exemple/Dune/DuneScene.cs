@@ -5,7 +5,8 @@ using Raylib_CsLo;
 using CapyEngine.CameraNode;
 using CapyEngine.UtilsNode;
 using CapyEngine.EntityNode.GuiNode;
-using CapyEngine.GeneratorNode.TileMapGenerator;
+using CapyEngine.GeneratorNode.TileMapGeneratorNode;
+using CapyEngine.TextureNode;
 
 
 namespace CapyEngine.Exemple.Dune
@@ -36,6 +37,7 @@ namespace CapyEngine.Exemple.Dune
             world.Update();
             GameManager.currentCursor.Update();
             GameManager.currentCamera.Update();
+            TexturesFactory.Update();
         }
 
         public void Draw()

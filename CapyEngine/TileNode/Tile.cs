@@ -5,7 +5,6 @@ using Raylib_CsLo;
 using CapyEngine.UtilsNode;
 using CapyEngine.WorldNode;
 using CapyEngine.Exemple.Dune;
-using CapyEngine.UtilNode;
 
 namespace CapyEngine.TileNode
 {
@@ -18,7 +17,7 @@ namespace CapyEngine.TileNode
         public Tile(ObjectID id, int x, int y, int size) : base(x*size, y*size, 1, 1, size)
         {
             this.id = id;
-            texture = Textures.Get(id);
+            texture = TexturesFactory.Get(id);
             state = TileStates.Get(id);
         }
 
@@ -41,11 +40,16 @@ namespace CapyEngine.TileNode
             return id.GetHashCode();
         }
 
+        public void Set(ObjectID id)
+        {
+            this.id = id;
+            texture = TexturesFactory.Get(id);
+            state = TileStates.Get(id);
+        }
+
         public void Destroy()
         {
-            id = ObjectID.VOID;
-            texture = Textures.Get(id);
-            state = TileStates.Get(id);
+            Set(ObjectID.VOID);
         }
 
         public void Destroy(World world)

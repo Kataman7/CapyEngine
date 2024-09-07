@@ -3,7 +3,7 @@ using SharpNoise.Modules;
 using SharpNoise;
 using System.Runtime.InteropServices;
 
-namespace CapyEngine.GeneratorNode.FloatGenerator
+namespace CapyEngine.GeneratorNode.FloatGeneratorNode
 {
     internal class NoiseGenerator : IFloatGenerator
     {
@@ -19,8 +19,8 @@ namespace CapyEngine.GeneratorNode.FloatGenerator
                 Seed = new Random().Next()
             };
 
-            var noiseMap = new NoiseMap();
-            var noiseMapBuilder = new PlaneNoiseMapBuilder
+            noiseMap = new NoiseMap();
+            noiseMapBuilder = new PlaneNoiseMapBuilder
             {
                 DestNoiseMap = noiseMap,
                 SourceModule = noiseSource
@@ -46,7 +46,7 @@ namespace CapyEngine.GeneratorNode.FloatGenerator
             return grid;
         }
 
-        public float[,] Get()
+        public float[,] Generate()
         {
             return grid;
         }

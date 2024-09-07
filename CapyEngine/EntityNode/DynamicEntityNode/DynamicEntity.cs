@@ -1,6 +1,7 @@
 ﻿using CapyEngine.TileNode;
 using CapyEngine.WorldNode;
 using Raylib_CsLo;
+using System.Collections.Generic;
 
 namespace CapyEngine.EntityNode.DynamicEntityNode
 {
@@ -22,10 +23,11 @@ namespace CapyEngine.EntityNode.DynamicEntityNode
             this.world = world;
             alive = true;
         }
-        public TileState checkTileMapCollision()
+        public HashSet<TileState> checkTileMapCollision()
         {
             float blockX = hitBox.x / world.tileMap.tileSize;
             float blockY = hitBox.y / world.tileMap.tileSize;
+            HashSet<TileState> states = new HashSet<TileState>();
 
             for (int y = (int)blockY - 5; y < blockY + 5; ++y)
             {
@@ -35,14 +37,11 @@ namespace CapyEngine.EntityNode.DynamicEntityNode
 
                     if (Raylib.CheckCollisionRecs(hitBox, tile.hitBox))
                     {
-                        if (tile.state != TileState.VOID)
-                        {
-                            return tile.state;
-                        }
+                        states.Add(tile.state);
                     }
                 }
             }
-            return TileState.VOID;
+            return states;
         }
 
         override public void Update()
@@ -55,7 +54,7 @@ namespace CapyEngine.EntityNode.DynamicEntityNode
             velY += weight * Raylib.GetFrameTime();
             hitBox.y += velY * Raylib.GetFrameTime();
 
-            if (checkTileMapCollision() == TileState.SOLID)
+            if (checkTileMapCollision().Contains(TileState.SOLID))
             {
                 velY = 0;
                 hitBox.y = previousY;
@@ -63,7 +62,7 @@ namespace CapyEngine.EntityNode.DynamicEntityNode
 
             hitBox.x += velX * Raylib.GetFrameTime();
 
-            if (checkTileMapCollision() == TileState.SOLID)
+            if (checkTileMapCollision().Contains(TileState.SOLID))
             {
                 velX = 0;
                 hitBox.x = previousX;

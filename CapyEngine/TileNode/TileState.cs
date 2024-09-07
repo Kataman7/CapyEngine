@@ -10,7 +10,7 @@ namespace CapyEngine.TileNode
 {
     public enum TileState
     {
-        VOID, SOLID, LIQUID
+        VOID, SOLID, LIQUID, STAIR
     }
 
     public static class TileStates
@@ -19,13 +19,14 @@ namespace CapyEngine.TileNode
 
         static TileStates()
         {
-           list = new Dictionary<ObjectID, TileState>()
-           {
+            list = new Dictionary<ObjectID, TileState>()
+            {
                 { ObjectID.VOID, TileState.VOID },
                 { ObjectID.DIRT, TileState.SOLID },
                 { ObjectID.DIRT_GRASS, TileState.SOLID },
-                { ObjectID.STONE, TileState.SOLID }
-           };
+                { ObjectID.STONE, TileState.SOLID },
+                { ObjectID.VINE, TileState.STAIR },
+            };
         }
 
         public static TileState Get(ObjectID tileID)

@@ -17,7 +17,7 @@ namespace TerrariaLikeCs
             }
 
             Raylib.CloseWindow();
-            Textures.UnloadTexture();
+            TexturesFactory.UnloadTexture();
             return Task.CompletedTask;
         }
     }

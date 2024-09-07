@@ -27,10 +27,10 @@ namespace CapyEngine.EntityNode.DynamicEntityNode.SpriteNode
             jumpPower = 600;
             jumpMax = 3;
             speed = 15000;
-            texture = Textures.Get(ObjectID.PLAYER_IDLE);
+            texture = TexturesFactory.Get(ObjectID.PLAYER_IDLE);
             origin = new Vector2(0, 0);
             direction = 1;
-            body = new Rectangle(x, y, 2 * world.tileMap.tileSize, 3 * world.tileMap.tileSize);
+            body = new Rectangle(x, y, 2 * world.tileMap.tileSize, 3 * world.tileMap.tileSize - 1);
             inventory = new Inventory(10);
         }
         private void Moove(int direction)
@@ -81,15 +81,15 @@ namespace CapyEngine.EntityNode.DynamicEntityNode.SpriteNode
 
             if (velY < -1 || velY > 1)
             {
-                texture = Textures.Get(ObjectID.PLAYER_JUMP);
+                texture = TexturesFactory.Get(ObjectID.PLAYER_JUMP);
             }
             else if (velX == 0)
             {
-                texture = Textures.Get(ObjectID.PLAYER_IDLE);
+                texture = TexturesFactory.Get(ObjectID.PLAYER_IDLE);
             }
             else
             {
-                texture = Textures.Get(ObjectID.PLAYER_RUN);
+                texture = TexturesFactory.Get(ObjectID.PLAYER_RUN);
             }
 
             if (velX != 0)
@@ -97,15 +97,13 @@ namespace CapyEngine.EntityNode.DynamicEntityNode.SpriteNode
                 direction = velX < 0 ? -1 : 1;
             }
 
-            texture.Update();
-
             float previousX = hitBox.x;
             float previousY = hitBox.y;
 
             velY += weight * Raylib.GetFrameTime();
             hitBox.y += velY * Raylib.GetFrameTime();
 
-            if (checkTileMapCollision() == TileState.SOLID)
+            if (checkTileMapCollision().Contains(TileState.SOLID))
             {
                 if (velY > 0)
                 {
@@ -117,7 +115,7 @@ namespace CapyEngine.EntityNode.DynamicEntityNode.SpriteNode
 
             hitBox.x += velX * Raylib.GetFrameTime();
 
-            if (checkTileMapCollision() == TileState.SOLID)
+            if (checkTileMapCollision().Contains(TileState.SOLID))
             {
                 velX = 0;
                 hitBox.x = previousX;

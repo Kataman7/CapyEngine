@@ -1,4 +1,5 @@
-﻿using CapyEngine.GeneratorNode.TileMapGenerator;
+﻿using CapyEngine.GeneratorNode.TileMapGeneratorNode;
+using CapyEngine.GeneratorNode.TileMapGeneratorNode.PaternNode;
 using CapyEngine.UtilsNode;
 using CapyEngine.WorldNode;
 
@@ -8,44 +9,14 @@ namespace CapyEngine.Exemple.Dune
     {
         public override void Create()
         {
-            landGeneration();
-            caveGeneration();
-        }
-
-        private void landGeneration()
-        {
-            int[] altitude = WorldGenerator.altitudeGeneration(tileMap.width, 5, 0.16f, 20);
-
-            for (int x = 0; x < tileMap.width; x++)
-            {
-                for (int y = 0; y < tileMap.height; y++)
-                {
-                    if (y == altitude[x])
-                    {
-                        tileMap.SetTile(x, y, ObjectID.DIRT_GRASS);
-                    }
-                    else if (y > altitude[x] && y < altitude[x] + 3)
-                    {
-                        tileMap.SetTile(x, y, ObjectID.DIRT);
-                    }
-                    else if (y >= altitude[x] + 3 && y < altitude[x] + 6)
-                    {
-                        tileMap.SetTile(x, y, ObjectID.STONE);
-                    }
-                    else if (y >= altitude[x] + 6)
-                    {
-                        RandomGenerator.RandomTileGeneration(tileMap, x, y, 0.51f, ObjectID.STONE, ObjectID.VOID, null);
-                    }
-                }
-            }
-        }
-
-        private void caveGeneration()
-        {
-            for (int i = 0; i < 15; i++)
-            {
-                WorldGenerator.NextCaveGeneration(tileMap, ObjectID.STONE, ObjectID.VOID);
-            }
+            RandomGenerator randomStone = new RandomGenerator(tileMap, ObjectID.STONE, ObjectID.VOID, 0.5f, null);
+            CaveGenerator cave = new CaveGenerator(tileMap, ObjectID.STONE, ObjectID.VOID, 15);
+            AltitudeGenerator altitude = new AltitudeGenerator(tileMap, 5, 0.16f, 20);
+            PaternsGenerator paterns = new PaternsGenerator(tileMap, new List<Patern> { PaternFactory.VINE });
+            randomStone.Generate();
+            altitude.Generate();
+            cave.Generate();
+            paterns.Generate();
         }
 
         public override void Update()
@@ -60,7 +31,6 @@ namespace CapyEngine.Exemple.Dune
 
         public override void Draw()
         {
-            tileMap.DrawPro();
             for (int i = 0; i < entities.Count; i++)
             {
                 if (entities[i].alive)
@@ -73,6 +43,7 @@ namespace CapyEngine.Exemple.Dune
                     i--;
                 }
             }
+            tileMap.DrawPro();
         }
     }
 }

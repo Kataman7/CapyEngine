@@ -8,7 +8,7 @@ namespace CapyEngine.TextureNode
         public Raylib_CsLo.Texture texture; 
         public Texture(String imagePath) : base(0, 0, 0, 0, 1)
         {
-            texture = Raylib.LoadTexture(imagePath);
+            texture = Raylib.LoadTexture(imagePath + ".png");
             hitBox.width = texture.width;
             hitBox.height = texture.height;
         }

@@ -10,14 +10,14 @@ namespace CapyEngine.UtilNode
         private int index;
         private Timer timer;
 
-        public AnimatedTexture(string imagePath, int frameNumber, float interval) : base(imagePath+0+".png")
+        public AnimatedTexture(string imagePath, int frameNumber, float interval) : base(imagePath+0)
         {
             frames = new List<TextureNode.Texture>();
             index = 0;
             for (int i = 0; i < frameNumber; i++)
             {
-                frames.Add(new TextureNode.Texture(imagePath + i + ".png"));
-                Console.WriteLine(imagePath + i + ".png");
+                frames.Add(new TextureNode.Texture(imagePath + i));
+                Console.WriteLine(imagePath + i);
             }
             timer = new Timer(interval);
         }
