@@ -13,10 +13,24 @@ namespace CapyEngine.Exemple.Dune
             CaveGenerator cave = new CaveGenerator(tileMap, ObjectID.STONE, ObjectID.VOID, 15);
             AltitudeGenerator altitude = new AltitudeGenerator(tileMap, 5, 0.16f, 20);
             PaternsGenerator paterns = new PaternsGenerator(tileMap, new List<Patern> { PaternFactory.VINE });
+            MineralGenerator mineralBlackGenerator = new MineralGenerator(tileMap, ObjectID.MINERAL_BLACK, ObjectID.STONE, 0.07f, ObjectID.STONE, new ConwayRule { min = 1, max = 2, born = 3 }, 1);
+            MineralGenerator mineralWhiteGenerator = new MineralGenerator(tileMap, ObjectID.MINERAL_WHITE, ObjectID.STONE, 0.03f, ObjectID.STONE, new ConwayRule { min = 1, max = 3, born = 3 }, 1);
+            MineralGenerator mineralPurpleGenerator = new MineralGenerator(tileMap, ObjectID.MINERAL_PURPLE, ObjectID.STONE, 0.04f, ObjectID.STONE, new ConwayRule { min = 1, max = 2, born = 3 }, 1);
+            MineralGenerator mineralPink = new MineralGenerator(tileMap, ObjectID.MINERAL_PINK, ObjectID.STONE, 0.03f, ObjectID.STONE, new ConwayRule { min = 1, max = 2, born = 3 }, 1);
+
+            MineralGenerator stoneGrass = new MineralGenerator(tileMap, ObjectID.STONE_GRASS, ObjectID.STONE, 0.1f, ObjectID.STONE, new ConwayRule { min = 1, max = 2, born = 3 }, 2);
+            MineralGenerator stoneDirt = new MineralGenerator(tileMap, ObjectID.STONE_DIRT, ObjectID.STONE, 0.03f, ObjectID.STONE, new ConwayRule { min = 1, max = 3, born = 3 }, 3);
+
             randomStone.Generate();
             altitude.Generate();
             cave.Generate();
             paterns.Generate();
+            mineralBlackGenerator.Generate();
+            mineralWhiteGenerator.Generate();
+            mineralPurpleGenerator.Generate();
+            mineralPink.Generate();
+            stoneDirt.Generate();
+            stoneGrass.Generate();
         }
 
         public override void Update()

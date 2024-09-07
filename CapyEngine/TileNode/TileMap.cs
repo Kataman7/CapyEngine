@@ -80,7 +80,7 @@ namespace CapyEngine.TileNode
 
         public void SetTile(int x, int y, ObjectID tileID)
         {
-            tiles[y * width + x] = new Tile(tileID, x, y, tileSize);
+            tiles[y * width + x] = TilesFactory.Create(tileID, this, x, y);
         }
 
         public void SetTilePro(int x, int y, ObjectID tileID)
@@ -136,6 +136,11 @@ namespace CapyEngine.TileNode
                 {
                     SaveToFile("save");
                 }
+            }
+
+            foreach (Tile tile in tiles)
+            {
+                tile.Update();
             }
         }
     }

@@ -4,6 +4,7 @@ using CapyEngine.Exemple.Dune;
 using CapyEngine.TileNode;
 using CapyEngine.EntityNode.GuiNode;
 using System.Numerics;
+using CapyEngine.WorldNode;
 
 namespace CapyEngine.UtilsNode
 {
@@ -14,5 +15,6 @@ namespace CapyEngine.UtilsNode
         public static IScene currentScene = new DuneScene();
         public static Cursor currentCursor = new Cursor(5);
         public static Vector2 vecOrigin = new Vector2(0, 0);
+        public static World currentWorld = null;
     }
 }

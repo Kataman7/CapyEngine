@@ -40,7 +40,7 @@ namespace CapyEngine.GeneratorNode.FloatGeneratorNode
             return count;
         }
 
-        private float[,] CreateNeighborsGrid(TileMap tileMap, ObjectID livingValue)
+        public float[,] Generate()
         {
             float[,] neighborsGrid = new float[tileMap.width, tileMap.height];
 
@@ -53,11 +53,6 @@ namespace CapyEngine.GeneratorNode.FloatGeneratorNode
             }
 
             return neighborsGrid;
-        }
-
-        public float[,] Generate()
-        {
-            return CreateNeighborsGrid(tileMap, neighbor);
         }
 
         public static int[,] GetNeighborsAround(TileMap tileMap, ObjectID livingValue, int x, int y)

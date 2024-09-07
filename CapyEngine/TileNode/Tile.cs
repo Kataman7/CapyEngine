@@ -40,7 +40,7 @@ namespace CapyEngine.TileNode
             return id.GetHashCode();
         }
 
-        public void Set(ObjectID id)
+        private void Set(ObjectID id)
         {
             this.id = id;
             texture = TexturesFactory.Get(id);
