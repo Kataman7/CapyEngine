@@ -49,11 +49,15 @@ namespace CapyEngine.EntityNode.DynamicEntityNode.SpriteNode
 
         private void Destroy()
         {
-
             Vector2 pos = Raylib.GetScreenToWorld2D(Raylib.GetMousePosition(), GameManager.currentCamera.camera);
             world.tileMap.GetTilePro((int)pos.X / world.tileMap.tileSize, (int)pos.Y / world.tileMap.tileSize).Destroy(world);
             // for terraria like game
+        }
 
+        private void Build()
+        {
+            Vector2 pos = Raylib.GetScreenToWorld2D(Raylib.GetMousePosition(), GameManager.currentCamera.camera);
+            world.tileMap.SetTilePro((int)pos.X / world.tileMap.tileSize, (int)pos.Y / world.tileMap.tileSize, ObjectID.TNT);
         }
 
         private void Control()
@@ -73,6 +77,10 @@ namespace CapyEngine.EntityNode.DynamicEntityNode.SpriteNode
             if (Raylib.IsMouseButtonDown(MouseButton.MOUSE_BUTTON_LEFT))
             {
                 Destroy();
+            }
+            if (Raylib.IsMouseButtonDown(MouseButton.MOUSE_BUTTON_RIGHT))
+            {
+                Build();
             }
         }
         public override void Update()

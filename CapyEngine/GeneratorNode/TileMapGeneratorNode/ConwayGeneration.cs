@@ -58,12 +58,13 @@ namespace CapyEngine.GeneratorNode.TileMapGeneratorNode
             }
         }
 
-        public void Generate()
+        public Task Generate()
         {
             for (int i = 0; i < interation; i++)
             {
                 NextGeneration();
             }
+            return Task.CompletedTask;
         }
     }
 }

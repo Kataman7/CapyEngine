@@ -35,7 +35,7 @@ namespace CapyEngine.GeneratorNode.TileMapGeneratorNode
             }
         }
 
-        public void Generate()
+        public Task Generate()
         {
             for (int y = 0; y < tileMap.height; y++)
             {
@@ -44,6 +44,7 @@ namespace CapyEngine.GeneratorNode.TileMapGeneratorNode
                     RandomTile(x, y);
                 }
             }
+            return Task.CompletedTask;
         }
     }
 }

@@ -15,7 +15,7 @@ namespace CapyEngine.GeneratorNode.TileMapGeneratorNode.PaternNode
             this.paterns = paterns;
         }
 
-        public void Generate()
+        public Task Generate()
         {
             for (int x = 0; x < tileMap.width; x++)
             {
@@ -31,6 +31,7 @@ namespace CapyEngine.GeneratorNode.TileMapGeneratorNode.PaternNode
                     });
                 }
             }
+            return Task.CompletedTask;
         }
     }
 }

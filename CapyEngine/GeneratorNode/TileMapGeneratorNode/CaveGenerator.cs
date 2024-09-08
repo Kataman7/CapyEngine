@@ -20,7 +20,7 @@ namespace CapyEngine.GeneratorNode.TileMapGeneratorNode
             this.interation = interation;
         }
 
-        private void NextGeneration()
+        private Task NextGeneration()
         {
             float[,] neighborsGrid = new NeighborsGenerator(tileMap, livingValue).Generate();
 
@@ -40,13 +40,14 @@ namespace CapyEngine.GeneratorNode.TileMapGeneratorNode
                     }
                 }
             }
+            return Task.CompletedTask;
         }
 
-        public void Generate()
+        public async Task Generate()
         {
             for (int i = 0; i < interation; i++)
             {
-                NextGeneration();
+                await NextGeneration();
             }
         }
 

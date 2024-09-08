@@ -32,7 +32,9 @@ namespace CapyEngine.TileNode
                 { ObjectID.MINERAL_WHITE, TileState.SOLID },
                 { ObjectID.STONE_DIRT, TileState.SOLID },
                 { ObjectID.STONE_GRASS, TileState.SOLID },
-                { ObjectID.GRASS, TileState.VOID }
+                { ObjectID.GRASS, TileState.VOID },
+                { ObjectID.FIRE, TileState.VOID },
+                { ObjectID.TNT, TileState.SOLID },
             };
         }
 

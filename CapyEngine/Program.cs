@@ -6,7 +6,7 @@ namespace TerrariaLikeCs
 {
     public static class Program
     {
-        public static Task Main(string[] args)
+        public static async Task Main(string[] args)
         {
             Raylib.InitWindow(1280, 720, "CapyEngine");
 
@@ -18,7 +18,7 @@ namespace TerrariaLikeCs
 
             Raylib.CloseWindow();
             TexturesFactory.UnloadTexture();
-            return Task.CompletedTask;
+            //return Task.CompletedTask;
         }
     }
 }

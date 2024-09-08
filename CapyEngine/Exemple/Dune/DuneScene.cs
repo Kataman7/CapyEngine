@@ -18,16 +18,23 @@ namespace CapyEngine.Exemple.Dune
         private BasicMonster monster;
         public DuneScene()
         {
+            _ = Initialize();
+        }
+
+        public async Task Initialize()
+        {
             world = new DuneWorld(1000, 1000, 30);
 
-            GameManager.currentWorld = world; 
+            GameManager.currentWorld = world;
+            await world.Create();
+            await Task.Delay(1000);
 
-            player = new PlatformPlayer((world.tileMap.width / 2)*world.tileMap.tileSize, -world.tileMap.tileSize*20, world);
+            player = new PlatformPlayer((world.tileMap.width / 2) * world.tileMap.tileSize, -world.tileMap.tileSize * 20, world);
             monster = new BasicMonster(0, 0, world);
             GameManager.currentCursor = new Cursor(world.tileMap.tileSize / 8);
 
             //GameManager.currentCamera = new CameraSmooth(player, 1000, 1f, 350, 150);
-            //GameManager.currentCamera.target = player;
+            GameManager.currentCamera.target = player;
 
             world.entities.Add(player);
             world.entities.Add(monster);

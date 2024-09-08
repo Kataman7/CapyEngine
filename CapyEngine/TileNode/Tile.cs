@@ -12,7 +12,7 @@ namespace CapyEngine.TileNode
     {
         public ObjectID id;
         public TileState state;
-        private TextureNode.Texture texture;
+        protected TextureNode.Texture texture;
 
         public Tile(ObjectID id, int x, int y, int size) : base(x*size, y*size, 1, 1, size)
         {
@@ -59,6 +59,11 @@ namespace CapyEngine.TileNode
                 world.entities.Add(new Drop((int)(hitBox.X + hitBox.width / 4), (int)(hitBox.y + hitBox.width / 4), this, world));
                 Destroy();
             }
+        }
+
+        public virtual void UpdatePro()
+        {
+            base.Update();
         }
     }
 }

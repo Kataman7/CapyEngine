@@ -7,7 +7,7 @@ namespace CapyEngine.Exemple.Dune
 {
     public class DuneWorld(int width, int height, int tileSize) : World(width, height, tileSize)
     {
-        public override void Create()
+        public override async Task Create()
         {
             RandomGenerator randomStone = new RandomGenerator(tileMap, ObjectID.STONE, ObjectID.VOID, 0.5f, null);
             CaveGenerator cave = new CaveGenerator(tileMap, ObjectID.STONE, ObjectID.VOID, 15);
@@ -21,16 +21,27 @@ namespace CapyEngine.Exemple.Dune
             MineralGenerator stoneGrass = new MineralGenerator(tileMap, ObjectID.STONE_GRASS, ObjectID.STONE, 0.1f, ObjectID.STONE, new ConwayRule { min = 1, max = 2, born = 3 }, 2);
             MineralGenerator stoneDirt = new MineralGenerator(tileMap, ObjectID.STONE_DIRT, ObjectID.STONE, 0.03f, ObjectID.STONE, new ConwayRule { min = 1, max = 3, born = 3 }, 3);
 
-            randomStone.Generate();
-            altitude.Generate();
-            cave.Generate();
-            paterns.Generate();
-            mineralBlackGenerator.Generate();
-            mineralWhiteGenerator.Generate();
-            mineralPurpleGenerator.Generate();
-            mineralPink.Generate();
-            stoneDirt.Generate();
-            stoneGrass.Generate();
+            UpdateGenerator updateGenerator = new UpdateGenerator(tileMap, 20);
+
+            RandomGenerator rddirt = new RandomGenerator(tileMap, ObjectID.DIRT, ObjectID.STONE, 0.015f, ObjectID.STONE);
+            SpreadGenerator dirt = new SpreadGenerator(tileMap, ObjectID.DIRT, ObjectID.STONE, 10, new ConwayRule{ min = 1, max = 8, born = 10});
+
+
+            await randomStone.Generate();
+            await altitude.Generate();
+            await cave.Generate();
+            await paterns.Generate();
+
+            await rddirt.Generate();
+            await dirt.Generate();
+
+            await mineralBlackGenerator.Generate();
+            await mineralWhiteGenerator.Generate();
+            await mineralPurpleGenerator.Generate();
+            await mineralPink.Generate();
+            await stoneDirt.Generate();
+            await stoneGrass.Generate();
+            await updateGenerator.Generate();
         }
 
         public override void Update()

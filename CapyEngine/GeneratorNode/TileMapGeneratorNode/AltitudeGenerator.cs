@@ -34,7 +34,7 @@ namespace CapyEngine.GeneratorNode.TileMapGeneratorNode
             return altitude;
         }
 
-        public void Generate()
+        public Task Generate()
         {
             int[] altitude = CurvatureGeneration();
 
@@ -50,16 +50,17 @@ namespace CapyEngine.GeneratorNode.TileMapGeneratorNode
                     {
                         tileMap.SetTile(x, y, ObjectID.DIRT_GRASS);
                     }
-                    else if (y > altitude[x] && y < altitude[x] + 3)
+                    else if (y > altitude[x] && y < altitude[x] + 2)
                     {
                         tileMap.SetTile(x, y, ObjectID.DIRT);
                     }
-                    else if (y >= altitude[x] + 3 && y < altitude[x] + 6)
+                    else if (y >= altitude[x] + 2 && y < altitude[x] + 6)
                     {
                         tileMap.SetTile(x, y, ObjectID.STONE);
                     }
                 }
             }
+            return Task.CompletedTask;
         }
     }
 }

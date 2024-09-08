@@ -11,6 +11,8 @@ namespace CapyEngine.TileNode
             {
                 case ObjectID.VINE:
                     return new VineTile(tileId, x, y, tileMap);
+                case ObjectID.TNT:
+                    return new TntTile(tileId, x, y, tileMap);
                 default:
                     return new Tile(tileId, x, y, tileMap.tileSize); 
             }

@@ -122,6 +122,7 @@ namespace CapyEngine.TileNode
                     Tile tile = GetTilePro(x, y);
                     if (tile.id != ObjectID.VOID)
                     {
+                        tile.Update();
                         tile.Draw();
                     }
                 }
@@ -137,10 +138,13 @@ namespace CapyEngine.TileNode
                     SaveToFile("save");
                 }
             }
+        }
 
+        public void UpdateTiles()
+        {
             foreach (Tile tile in tiles)
             {
-                tile.Update();
+                tile.UpdatePro();
             }
         }
     }

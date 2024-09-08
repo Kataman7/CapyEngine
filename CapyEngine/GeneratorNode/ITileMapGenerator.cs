@@ -2,6 +2,6 @@
 {
     public interface ITileMapGenerator
     {
-        public void Generate();
+        public Task Generate();
     }
 }

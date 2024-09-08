@@ -31,24 +31,29 @@ namespace CapyEngine.TileNode.ProTileNode
             {
                 if (!updated)
                 {
-                    if (tileMap.GetTilePro(x, y - 1).state != TileState.SOLID && tileMap.GetTilePro(x, y - 1).state != TileState.STAIR)
-                    {
-                        if (GameManager.currentWorld != null)
-                        {
-                            tileMap.SetTile(x, y, ObjectID.VOID);
-                            updated = true;
-                            GameManager.currentWorld.entities.Add(new Drop((int)(hitBox.X + hitBox.width / 4), (int)(hitBox.y + hitBox.width / 4), this, GameManager.currentWorld));
-                        }
-                    }
-                    else if (tileMap.GetTilePro(x, y + 1).state == TileState.VOID)
-                    {
-                        tileMap.SetTilePro(x, y + 1, ObjectID.VINE);
-                    }
+                    UpdatePro();
                 }
                 else
                 {
                     updated = false;
                 }
+            }
+        }
+
+        public override void UpdatePro()
+        {
+            if (tileMap.GetTilePro(x, y - 1).state != TileState.SOLID && tileMap.GetTilePro(x, y - 1).state != TileState.STAIR)
+            {
+                if (GameManager.currentWorld != null)
+                {
+                    tileMap.SetTile(x, y, ObjectID.VOID);
+                    updated = true;
+                    GameManager.currentWorld.entities.Add(new Drop((int)(hitBox.X + hitBox.width / 4), (int)(hitBox.y + hitBox.width / 4), this, GameManager.currentWorld));
+                }
+            }
+            else if (tileMap.GetTilePro(x, y + 1).state == TileState.VOID)
+            {
+                tileMap.SetTilePro(x, y + 1, ObjectID.VINE);
             }
         }
     }

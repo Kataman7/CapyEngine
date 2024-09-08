@@ -12,12 +12,11 @@ namespace CapyEngine.WorldNode
         {
             tileMap = new TileMap(width, height, tileSize);
             entities = new List<DynamicEntity>();
-            Create();
         }
 
-        public virtual void Create()
+        public virtual Task Create()
         {
-
+            return Task.CompletedTask;
         }
 
         public virtual void Update()

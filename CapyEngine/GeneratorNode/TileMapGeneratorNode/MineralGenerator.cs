@@ -14,10 +14,10 @@ namespace CapyEngine.GeneratorNode.TileMapGeneratorNode
             conwayGeneration = new ConwayGeneration(tileMap, livingValue, deadValue, conditionValue, iterations, rule);
         }
 
-        public void Generate()
+        public async Task Generate()
         {
-            randomGenerator.Generate();
-            conwayGeneration.Generate();
+            await randomGenerator.Generate();
+            await conwayGeneration.Generate();
         }
     }
 }
