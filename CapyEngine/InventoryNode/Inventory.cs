@@ -1,27 +1,36 @@
-﻿namespace CapyEngine.InventoryNode
+﻿using CapyEngine.TileNode;
+using CapyEngine.UtilsNode;
+using Raylib_CsLo;
+
+namespace CapyEngine.InventoryNode
 {
     public class Inventory
     {
-        private List<Item> list;
+        public List<Item> items;
         private int maxItem;
+        private int selectedX;
+        private int selectedY;
+
         public Inventory(int maxItem) 
         {
-            list = new();
+            items = new();
             this.maxItem = maxItem;
+            selectedX = 0;
+            selectedY = 0;
         }
 
         public bool Add(Item item)
         {
-            Item? existingItem = list.FirstOrDefault(i => i.Equals(item) && i.quantity < i.quantityMax);
+            Item? existingItem = items.FirstOrDefault(i => i.Equals(item) && i.quantity < i.quantityMax);
 
             if (existingItem != null)
             {
                 existingItem.Combine(item);
                 return true;
             }
-            else if (list.Count() < maxItem)
+            else if (items.Count() < maxItem)
             {
-                list.Add(item);
+                items.Add(item);
                 return true;
             }
             return false;
@@ -31,24 +40,42 @@
         {
             item.quantity = -quantity;
 
-            Item? existingItem = list.FirstOrDefault(i => i.Equals(item) && i.quantity < i.quantityMax);
+            Item? existingItem = items.FirstOrDefault(i => i.Equals(item) && i.quantity < i.quantityMax);
             if (existingItem != null)
             {
                 existingItem.Combine(item);
                 if (existingItem.quantity <= 0)
                 {
-                    list.Remove(existingItem);
+                    items.Remove(existingItem);
                 }
                 return true;
             }
             return false;
         }
 
-        public void Draw()
+        public void Update()
         {
-            foreach (Item item in list)
+            if (Raylib.GetMouseWheelMove() > 0)
             {
-                Console.WriteLine(item.id + " " + item.quantity);
+                if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT_SHIFT))
+                {
+                    selectedY--;
+                }
+                else
+                {
+                    selectedX--;
+                }
+            }
+            else if (Raylib.GetMouseWheelMove() < 0)
+            {
+                if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT_SHIFT))
+                {
+                    selectedY++;
+                }
+                else
+                {
+                    selectedX++;
+                }
             }
         }
     }
