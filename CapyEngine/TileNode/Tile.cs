@@ -24,6 +24,10 @@ namespace CapyEngine.TileNode
         public override void Draw()
         {
             Raylib.DrawTexturePro(texture.texture, texture.hitBox, hitBox, GameManager.vecOrigin, 0, Raylib.WHITE);
+            if (Raylib.CheckCollisionPointRec(Raylib.GetScreenToWorld2D(Raylib.GetMousePosition(), GameManager.currentCamera.camera), hitBox))
+            {
+                Raylib.DrawRectangleLines((int)hitBox.x, (int)hitBox.y, (int)hitBox.width, (int)hitBox.height, Raylib.WHITE);
+            }
         }
 
         public override bool Equals(Object obj)

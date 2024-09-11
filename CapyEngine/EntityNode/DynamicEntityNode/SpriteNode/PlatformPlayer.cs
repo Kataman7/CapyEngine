@@ -58,7 +58,7 @@ namespace CapyEngine.EntityNode.DynamicEntityNode.SpriteNode
         private void Build()
         {
             Vector2 pos = Raylib.GetScreenToWorld2D(Raylib.GetMousePosition(), GameManager.currentCamera.camera);
-            if (world.tileMap.GetTile((int)pos.X / world.tileMap.tileSize, (int) pos.Y / world.tileMap.tileSize).id == ObjectID.VOID)
+            if (world.tileMap.GetTilePro((int)pos.X / world.tileMap.tileSize, (int) pos.Y / world.tileMap.tileSize).id == ObjectID.VOID)
             {
                 Item? item = inventory.RemoveSelectedItem();
                 if (item != null)
