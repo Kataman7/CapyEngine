@@ -31,7 +31,7 @@ namespace CapyEngine.Exemple.Dune
             await Task.Delay(1000);
 
             player = new PlatformPlayer((world.tileMap.width / 2) * world.tileMap.tileSize, -world.tileMap.tileSize * 20, world);
-            inventory = new InventoryDisplay(player.inventory, 5, 2, 0, 0, world.tileMap.tileSize);
+            inventory = new InventoryDisplay(player.inventory, 5, 2, 0, 0, world.tileMap.tileSize * 2);
             monster = new BasicMonster(0, 0, world);
             GameManager.currentCursor = new Cursor(world.tileMap.tileSize / 8);
 
