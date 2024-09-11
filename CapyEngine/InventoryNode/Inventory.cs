@@ -8,15 +8,11 @@ namespace CapyEngine.InventoryNode
     {
         public List<Item> items;
         private int maxItem;
-        private int selectedX;
-        private int selectedY;
 
         public Inventory(int maxItem) 
         {
             items = new();
             this.maxItem = maxItem;
-            selectedX = 0;
-            selectedY = 0;
         }
 
         public bool Add(Item item)
@@ -38,12 +34,16 @@ namespace CapyEngine.InventoryNode
 
         public bool Remove(Item item, int quantity)
         {
-            item.quantity = -quantity;
-
             Item? existingItem = items.FirstOrDefault(i => i.Equals(item) && i.quantity < i.quantityMax);
+
+            if (existingItem == null)
+            {
+                existingItem = items.FirstOrDefault(i => i.Equals(item));
+            }
+
             if (existingItem != null)
             {
-                existingItem.Combine(item);
+                existingItem.quantity -= quantity;
                 if (existingItem.quantity <= 0)
                 {
                     items.Remove(existingItem);
@@ -55,28 +55,6 @@ namespace CapyEngine.InventoryNode
 
         public void Update()
         {
-            if (Raylib.GetMouseWheelMove() > 0)
-            {
-                if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT_SHIFT))
-                {
-                    selectedY--;
-                }
-                else
-                {
-                    selectedX--;
-                }
-            }
-            else if (Raylib.GetMouseWheelMove() < 0)
-            {
-                if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT_SHIFT))
-                {
-                    selectedY++;
-                }
-                else
-                {
-                    selectedX++;
-                }
-            }
         }
     }
 }

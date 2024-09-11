@@ -24,7 +24,7 @@ namespace CapyEngine.Exemple.Dune
             UpdateGenerator updateGenerator = new UpdateGenerator(tileMap, 20);
 
             RandomGenerator rddirt = new RandomGenerator(tileMap, ObjectID.DIRT, ObjectID.STONE, 0.015f, ObjectID.STONE);
-            SpreadGenerator dirt = new SpreadGenerator(tileMap, ObjectID.DIRT, ObjectID.STONE, 10, new ConwayRule{ min = 1, max = 8, born = 10});
+            SpreadGenerator dirt = new SpreadGenerator(tileMap, ObjectID.DIRT, ObjectID.STONE, 20, new ConwayRule{ min = 1, max = 5, born = 10});
 
 
             await randomStone.Generate();

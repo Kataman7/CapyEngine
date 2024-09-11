@@ -1,5 +1,6 @@
 ﻿using CapyEngine.TextureNode;
 using CapyEngine.UtilsNode;
+using CapyEngine.TileNode;
 
 namespace CapyEngine.InventoryNode
 {
@@ -8,7 +9,7 @@ namespace CapyEngine.InventoryNode
         public int quantity;
         public ObjectID id;
         public Texture texture;
-        public int quantityMax;
+        public int quantityMax;  
         
         public Item(ObjectID id, int quantityMax)
         {
@@ -16,6 +17,11 @@ namespace CapyEngine.InventoryNode
             texture = TexturesFactory.Get(id);
             quantity = 1;
             this.quantityMax = quantityMax;
+        }
+
+        public Item(ObjectID id, int quantity, int quantityMax) : this(id, quantityMax)
+        {
+            this.quantity = quantity;
         }
 
         public void Combine(Item item)

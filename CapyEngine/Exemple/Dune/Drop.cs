@@ -52,7 +52,7 @@ namespace CapyEngine.Exemple.Dune
                 {
                     if (Raylib.CheckCollisionRecs(player.hitBox, hitBox))
                     {
-                        if (player.inventory.Add(new Item(stuff.id, 100))) alive = false;
+                        if (player.inventory.inventory.Add(new Item(stuff.id, stuff.quantity, 100))) alive = false;
                     }
                 }
             }

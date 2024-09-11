@@ -16,7 +16,6 @@ namespace CapyEngine.Exemple.Dune
         private World world;
         private PlatformPlayer player;
         private BasicMonster monster;
-        private InventoryDisplay inventory;
         public DuneScene()
         {
             _ = Initialize();
@@ -31,7 +30,6 @@ namespace CapyEngine.Exemple.Dune
             await Task.Delay(1000);
 
             player = new PlatformPlayer((world.tileMap.width / 2) * world.tileMap.tileSize, -world.tileMap.tileSize * 20, world);
-            inventory = new InventoryDisplay(player.inventory, 5, 2, 0, 0, world.tileMap.tileSize);
             monster = new BasicMonster(0, 0, world);
             GameManager.currentCursor = new Cursor(world.tileMap.tileSize / 8);
 
@@ -47,9 +45,6 @@ namespace CapyEngine.Exemple.Dune
         {
             GameManager.currentWorld = world;
             world.Update();
-            if (inventory != null)             {
-                inventory.Update();
-            }
             GameManager.currentCursor.Update();
             GameManager.currentCamera.Update();
             TexturesFactory.Update();
@@ -67,9 +62,9 @@ namespace CapyEngine.Exemple.Dune
             Raylib.EndMode2D();
             Raylib.DrawFPS(20, 20);
             GameManager.currentCursor.Draw();
-            if (inventory != null)
+            if (player != null)
             {
-                inventory.Draw();
+                player.inventory.Draw();
             }
             Raylib.EndDrawing();
         }

@@ -6,6 +6,7 @@ using CapyEngine.UtilsNode;
 using System.Numerics;
 using CapyEngine.UtilNode;
 using CapyEngine.InventoryNode;
+using CapyEngine.EntityNode.GuiNode;
 
 namespace CapyEngine.EntityNode.DynamicEntityNode.SpriteNode
 {
@@ -19,7 +20,7 @@ namespace CapyEngine.EntityNode.DynamicEntityNode.SpriteNode
         private Vector2 origin;
         private int direction;
         private Rectangle body;
-        public Inventory inventory;
+        public InventoryPlayer inventory;
 
         public PlatformPlayer(int x, int y, World world) : base(x, y, 1.25f, 2.625f, 10, 1300, world)
         {
@@ -31,7 +32,7 @@ namespace CapyEngine.EntityNode.DynamicEntityNode.SpriteNode
             origin = new Vector2(0, 0);
             direction = 1;
             body = new Rectangle(x, y, 2 * world.tileMap.tileSize, 3 * world.tileMap.tileSize - 1);
-            inventory = new Inventory(10);
+            inventory = new InventoryPlayer(new Inventory(10*5), 5, 10, 0, 0, (int)(world.tileMap.tileSize * 1.2));
         }
         private void Moove(int direction)
         {
@@ -57,7 +58,14 @@ namespace CapyEngine.EntityNode.DynamicEntityNode.SpriteNode
         private void Build()
         {
             Vector2 pos = Raylib.GetScreenToWorld2D(Raylib.GetMousePosition(), GameManager.currentCamera.camera);
-            world.tileMap.SetTilePro((int)pos.X / world.tileMap.tileSize, (int)pos.Y / world.tileMap.tileSize, ObjectID.TNT);
+            if (world.tileMap.GetTile((int)pos.X / world.tileMap.tileSize, (int) pos.Y / world.tileMap.tileSize).id == ObjectID.VOID)
+            {
+                Item? item = inventory.RemoveSelectedItem();
+                if (item != null)
+                {
+                    world.tileMap.SetTilePro((int)pos.X / world.tileMap.tileSize, (int)pos.Y / world.tileMap.tileSize, item.id);
+                }
+            }
         }
 
         private void Control()
@@ -86,6 +94,7 @@ namespace CapyEngine.EntityNode.DynamicEntityNode.SpriteNode
         public override void Update()
         {
             Control();
+            inventory.Update();
 
             if (velY < -1 || velY > 1)
             {
