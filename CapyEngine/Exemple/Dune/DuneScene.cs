@@ -23,7 +23,7 @@ namespace CapyEngine.Exemple.Dune
 
         public async Task Initialize()
         {
-            world = new DuneWorld(100, 100, 35);
+            world = new DuneWorld(300, 300, 35);
 
             GameManager.currentWorld = world;
             await world.Create();
@@ -61,11 +61,11 @@ namespace CapyEngine.Exemple.Dune
 
             Raylib.EndMode2D();
             Raylib.DrawFPS(20, 20);
-            GameManager.currentCursor.Draw();
             if (player != null)
             {
                 player.inventory.Draw();
             }
+            GameManager.currentCursor.Draw();
             Raylib.EndDrawing();
         }
     }

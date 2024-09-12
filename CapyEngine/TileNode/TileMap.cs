@@ -73,8 +73,10 @@ namespace CapyEngine.TileNode
 
         public Tile GetTilePro(int x, int y)
         {
-            x = ((x % width) + width) % width;
-            y = ((y % height) + height) % height;
+            if (x < 0 || x >= width || y < 0 || y >= height)
+            {
+                return TilesFactory.Create(ObjectID.VOID, this, x, y);
+            }
             return GetTile(x, y);
         }
 
@@ -85,8 +87,10 @@ namespace CapyEngine.TileNode
 
         public void SetTilePro(int x, int y, ObjectID tileID)
         {
-            x = ((x % width) + width) % width;
-            y = ((y % height) + height) % height;
+            if (x < 0 || x >= width || y < 0 || y >= height)
+            {
+                return;
+            }
             SetTile(x, y, tileID);
         }
 

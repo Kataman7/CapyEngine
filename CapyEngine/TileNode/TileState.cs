@@ -35,6 +35,12 @@ namespace CapyEngine.TileNode
                 { ObjectID.GRASS, TileState.VOID },
                 { ObjectID.FIRE, TileState.VOID },
                 { ObjectID.TNT, TileState.SOLID },
+                { ObjectID.TNT_ONFIRE, TileState.SOLID },
+                { ObjectID.FLOWER_BLUE, TileState.VOID },
+                { ObjectID.FLOWER_RED, TileState.VOID },
+                { ObjectID.FLOWER_WHITE, TileState.VOID },
+                { ObjectID.FLOWER_PURPLE, TileState.VOID },
+                { ObjectID.FLOWER_PINK, TileState.VOID }
             };
         }
 

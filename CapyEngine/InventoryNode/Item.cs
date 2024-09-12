@@ -26,8 +26,17 @@ namespace CapyEngine.InventoryNode
 
         public void Combine(Item item)
         {
-            quantity += item.quantity;
-            item.quantity = 0;
+            int totalQuantity = quantity + item.quantity;
+            if (totalQuantity > quantityMax)
+            {
+                item.quantity = totalQuantity - quantityMax;
+                quantity = quantityMax;
+            }
+            else
+            {
+                quantity = totalQuantity;
+                item.quantity = 0;
+            }
         }
 
         public bool Equals(Item item)

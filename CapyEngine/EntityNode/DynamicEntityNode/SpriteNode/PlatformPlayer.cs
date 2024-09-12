@@ -82,13 +82,17 @@ namespace CapyEngine.EntityNode.DynamicEntityNode.SpriteNode
             {
                 Moove(-1);
             }
-            if (Raylib.IsMouseButtonDown(MouseButton.MOUSE_BUTTON_LEFT))
+
+            if (!GameManager.currentCursor.onGUI)
             {
-                Destroy();
-            }
-            if (Raylib.IsMouseButtonDown(MouseButton.MOUSE_BUTTON_RIGHT))
-            {
-                Build();
+                if (Raylib.IsMouseButtonDown(MouseButton.MOUSE_BUTTON_LEFT))
+                {
+                    Destroy();
+                }
+                if (Raylib.IsMouseButtonDown(MouseButton.MOUSE_BUTTON_RIGHT))
+                {
+                    Build();
+                }
             }
         }
         public override void Update()

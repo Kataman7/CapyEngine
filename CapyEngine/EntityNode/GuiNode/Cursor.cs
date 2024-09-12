@@ -8,6 +8,7 @@ namespace CapyEngine.EntityNode.GuiNode
     public class Cursor : Entity
     {
         private int size;
+        public bool onGUI;
 
         public Cursor(int size) : base(0, 0, 1, 1, size)
         {

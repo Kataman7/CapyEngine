@@ -13,6 +13,18 @@ namespace CapyEngine.TileNode
                     return new VineTile(tileId, x, y, tileMap);
                 case ObjectID.TNT:
                     return new TntTile(tileId, x, y, tileMap);
+                case ObjectID.FLOWER_BLUE:
+                    return new DecorationTile(tileId, x, y, tileMap);
+                case ObjectID.FLOWER_PINK:
+                    return new DecorationTile(tileId, x, y, tileMap);
+                case ObjectID.FLOWER_RED:
+                    return new DecorationTile(tileId, x, y, tileMap);
+                case ObjectID.FLOWER_WHITE:
+                    return new DecorationTile(tileId, x, y, tileMap);
+                case ObjectID.FLOWER_PURPLE:
+                    return new DecorationTile(tileId, x, y, tileMap);
+                case ObjectID.GRASS:
+                    return new DecorationTile(tileId, x, y, tileMap);
                 default:
                     return new Tile(tileId, x, y, tileMap.tileSize); 
             }

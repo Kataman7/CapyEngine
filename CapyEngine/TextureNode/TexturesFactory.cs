@@ -26,10 +26,15 @@ namespace CapyEngine.TextureNode
                 { ObjectID.MINERAL_WHITE, new Texture(root + "mineral_white") },
                 { ObjectID.STONE_DIRT, new Texture(root + "stone_dirt") },
                 { ObjectID.STONE_GRASS, new Texture(root + "stone_grass") },
-                { ObjectID.GRASS, new Texture(root + "grass") },
+                { ObjectID.GRASS, new AnimatedTexture(root + "grass", 2, 0.8f) },
                 { ObjectID.TNT, new AnimatedTexture(root + "tnt/tnt_idle", 8, 0.2f) },
                 { ObjectID.TNT_ONFIRE, new AnimatedTexture(root + "tnt/tnt_", 8, 0.2f) },
                 { ObjectID.FIRE, new AnimatedTexture(root + "fire/fire", 8, 0.2f) },
+                { ObjectID.FLOWER_BLUE, new Texture(root + "flower_blue") },
+                { ObjectID.FLOWER_RED, new Texture(root + "flower_red") },
+                { ObjectID.FLOWER_WHITE, new Texture(root + "flower_white") },
+                { ObjectID.FLOWER_PURPLE, new Texture(root + "flower_purple") },
+                { ObjectID.FLOWER_PINK, new Texture(root + "flower_pink") }
             };
 
             root = "resources/textures/player/";

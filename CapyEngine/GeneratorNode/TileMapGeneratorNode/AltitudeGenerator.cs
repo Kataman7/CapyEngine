@@ -37,14 +37,26 @@ namespace CapyEngine.GeneratorNode.TileMapGeneratorNode
         public Task Generate()
         {
             int[] altitude = CurvatureGeneration();
+            ObjectID[] decorations = new ObjectID[] { ObjectID.FLOWER_PINK, ObjectID.FLOWER_BLUE, ObjectID.FLOWER_PURPLE, ObjectID.FLOWER_WHITE, ObjectID.FLOWER_RED, ObjectID.GRASS, ObjectID.GRASS, ObjectID.GRASS, ObjectID.GRASS };
 
             for (int x = 0; x < tileMap.width; x++)
             {
                 for (int y = 0; y < tileMap.height; y++)
                 {
-                    if (y < altitude[x])
+                    if (y < altitude[x] - 1)
                     {
                         tileMap.SetTile(x, y, ObjectID.VOID);
+                    }
+                    else if (y == altitude[x] - 1)
+                    {
+                        if (GameManager.random.Next(0, 100) < 50)
+                        {
+                            tileMap.SetTile(x, y, decorations[GameManager.random.Next(0, decorations.Length)]);
+                        }
+                        else
+                        {
+                            tileMap.SetTile(x, y, ObjectID.VOID);
+                        }
                     }
                     else if (y == altitude[x])
                     {

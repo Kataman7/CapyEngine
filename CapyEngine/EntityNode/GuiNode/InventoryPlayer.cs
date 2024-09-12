@@ -61,35 +61,38 @@ namespace CapyEngine.EntityNode.GuiNode
                     return item;
                 }
             }
-
             return null;
         }
 
         public override void Draw()
         {
-            if (isOpen)
+            if (!isOpen) return;
+            base.Draw();
+            for (int y = 0; y < height; y++)
             {
-                base.Draw();
-                for (int y = 0; y < height; y++)
+                for (int x = 0; x < width; x++)
                 {
-                    for (int x = 0; x < width; x++)
+                    Raylib.DrawRectangleLinesEx(rectangles[x, y], 2, new Color(10, 10, 10, 40));
+                    if (y * width + x < inventory.items.Count && inventory.items[y * width + x] != null)
                     {
-                        if (Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), rectangles[x, y]))
+                        Raylib.DrawTexturePro(inventory.items[y * width + x].texture.texture, inventory.items[y * width + x].texture.hitBox, rectangles[x, y], GameManager.vecOrigin, 0, Raylib.WHITE);
+                        Raylib.DrawText(Raylib.TextFormat("" + inventory.items[y * width + x].quantity), rectangles[x, y].x + 5, rectangles[x, y].y + 5, size / 2, Raylib.WHITE);
+                    }
+                    if (Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), rectangles[x, y]))
+                    {
+                        if (Raylib.IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_LEFT))
                         {
                             selectedX = x;
                             selectedY = y;
                         }
-
-                        Raylib.DrawRectangleLinesEx(rectangles[x, y], 2, new Color(10, 10, 10, 40));
-                        if (y * width + x < inventory.items.Count && inventory.items[y * width + x] != null)
+                        else
                         {
-                            Raylib.DrawTexturePro(inventory.items[y * width + x].texture.texture, inventory.items[y * width + x].texture.hitBox, rectangles[x, y], GameManager.vecOrigin, 0, Raylib.WHITE);
-                            Raylib.DrawText(Raylib.TextFormat("" + inventory.items[y * width + x].quantity), rectangles[x, y].x, rectangles[x, y].y, size / 2, Raylib.WHITE);
+                            Raylib.DrawRectangleLinesEx(rectangles[x, y], 2, new Color(10, 10, 10, 60));
                         }
-                        if (x == selectedX && y == selectedY)
-                        {
-                            Raylib.DrawRectangleLinesEx(rectangles[x, y], 2, Raylib.WHITE);
-                        }
+                    }
+                    if (x == selectedX && y == selectedY)
+                    {
+                        Raylib.DrawRectangleLinesEx(rectangles[x, y], 2, Raylib.WHITE);
                     }
                 }
             }
@@ -97,7 +100,20 @@ namespace CapyEngine.EntityNode.GuiNode
 
         public override void Update()
         {
+            if (isOpen)
+            {
+                if (Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), hitBox))
+                {
+                    GameManager.currentCursor.onGUI = true;
+                }
+                else
+                {
+                    GameManager.currentCursor.onGUI = false;
+                }
+            }
+
             inventory.Update();
+
             if (Raylib.IsKeyPressed(KeyboardKey.KEY_E))
             {
                 isOpen = !isOpen;
