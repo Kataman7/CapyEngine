@@ -74,6 +74,12 @@ namespace CapyEngine.EntityNode.GuiNode
                 {
                     for (int x = 0; x < width; x++)
                     {
+                        if (Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), rectangles[x, y]))
+                        {
+                            selectedX = x;
+                            selectedY = y;
+                        }
+
                         Raylib.DrawRectangleLinesEx(rectangles[x, y], 2, new Color(10, 10, 10, 40));
                         if (y * width + x < inventory.items.Count && inventory.items[y * width + x] != null)
                         {
